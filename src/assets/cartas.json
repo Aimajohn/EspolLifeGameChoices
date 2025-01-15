@@ -4,8 +4,8 @@
         "CardName": "Suit&Cofi",
         "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
         "src": "/src/assets/CafeSuit&Cofi.png" ,
-        "energia": 12,
-        "money": -1,
+        "energia": 5,
+        "money": -5,
         "conocimiento": 0,
         "social": 0
     },
@@ -16,17 +16,17 @@
         "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
         "energia": 12,
         "money": -1,
-        "conocimiento": 0,
-        "social": 0
+        "conocimiento": 5,
+        "social": 5
     },
     "003":{
         "id": "001",
         "CardName": "Libro Pesado",
         "src": "/src/assets/LibroPesado.png" ,
         "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
-        "energia": 12,
-        "money": -1,
-        "conocimiento": 0,
+        "energia": -4,
+        "money": 0,
+        "conocimiento": 5,
         "social": 0
     },
     "004":{
@@ -34,10 +34,10 @@
         "CardName": "Amigo Fiestero",
         "src": "/src/assets/AmigoFiestero.png" ,
         "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
-        "energia": 12,
+        "energia": 5,
         "money": -1,
         "conocimiento": 0,
-        "social": 0
+        "social": 7
     }
 
 }

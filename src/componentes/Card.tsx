@@ -1,6 +1,15 @@
 import cardData from "../assets/cartas.json"
 
-function Card({src, title, id, seleccionado}) {
+import React from 'react'
+
+type Props = {
+  url: string,
+  title:  string,
+  id: string,
+  seleccionado: React.Dispatch<React.SetStateAction<null>>
+}
+
+function Card({url, title, id, seleccionado}: Props) {
   const handleCard = (e)=>{
     const carta = cardData[id]
     seleccionado(carta)
@@ -11,10 +20,12 @@ function Card({src, title, id, seleccionado}) {
       {title}
         </p>
       <div className=''>
-      <img title={title} className='w-full' src={src}/>
+      <img title={title} className='w-full' src={url}/>
       </div>
     </div>
   )
 }
 
 export default Card
+
+ 
