@@ -1,108 +1,130 @@
-import { useState, useRef, useEffect } from 'react'
-import './App.css'
-import Card from '@/componentes/Card'
+import { useState, useEffect } from "react"
+import "./App.css"
+import Card from "@/componentes/Card"
 import { Button } from "@/components/ui/button"
-import cardData from "@/assets/cartas.json"
+import MazoCartas from "@/assets/cartas.json"
+import { StatsBar } from "@/components/StatsBar"
+import SelectedCard from "./componentes/SelectedCard"
 
-import { Copy } from "lucide-react"
- 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-
-type carta = {
-  id: string,
+type CartaT = {
+  id: string
   CardName: string
-  description: string 
-  src: string 
-  energia: number 
-  money: number 
-  conocimiento: number 
-  social: number  
+  description: string
+  src: string
+  energia: number
+  money: number
+  conocimiento: number
+  social: number
 }
 
+const misCartas = {
+  "001": {
+    id: "001",
+    CardName: "Suit&Cofi",
+    description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
+    src: "/EspolLifeGameChoices/src/assets/CafeSuit&Cofi.png",
+    energia: 5,
+    money: -5,
+    conocimiento: 0,
+    social: 0,
+  },
+  "002": {
+    id: "001",
+    CardName: "Trabajo en Grupo",
+    src: "/EspolLifeGameChoices/src/assets/TrabajaGrupo.png",
+    description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
+    energia: 12,
+    money: -1,
+    conocimiento: 5,
+    social: 5,
+  },
+}
 
+type mazo = {
+  [id: string]: CartaT
+}
 
 function App() {
-  const [selected, setSelected] = useState<carta|null>(null)
+  const [currentTurn, setCurrentTurn] = useState(1)
+  const [playDeck, setplayDeck] = useState<CartaT[]>(Object.values(MazoCartas))
+  const [actionPoints, setActionPoints] = useState(3)
+  const [selected, setSelected] = useState<CartaT | null>(null)
+  const [playCards, setPlayCards] = useState<mazo>(misCartas)
+  const [isGameOver, setIsGameOver] = useState(false)
   const [playerInfo, setPlayerInfo] = useState({
-    "energia": 50,
-    "money": 50,
-    "conocimiento": 50,
-    "social": 50
+    energia: 50,
+    money: 50,
+    conocimiento: 50,
+    social: 50,
   })
 
   useEffect(() => {
     // setChecked(true)
-    
   }, [selected])
 
-  const handleSelected = ()=>{
-    // seleccionado.current = null
-    setSelected(null)
-  }
-
-  const misCartas = []
-
-  for(const carta in cardData){
-    misCartas.push(
-      <div className='w-32'>
-        <Card title={cardData[carta].title} id={carta} url={cardData[carta].src} seleccionado={setSelected}/>
+  const renderJsonData = (cardData: mazo) => {
+    return Object.entries(cardData).map(([key, value]) => (
+      <div className="w-52" key={key}>
+        <Card info={value} id={key} seleccionado={setSelected} />
       </div>
-    )
+    ))
+  }
+  const miMazo = renderJsonData(playCards)
+
+  const handleMaze = () => {
+    if (playDeck.length > 0 && actionPoints > 0) {
+      const randomIndex = Math.floor(Math.random() * playDeck.length)
+      const drawnCard = playDeck[randomIndex]
+      console.log(drawnCard)
+      setplayDeck(playDeck.filter((_, index) => index !== randomIndex))
+      setPlayCards({ ...playCards, [drawnCard.id]: drawnCard })
+      setActionPoints(actionPoints - 1)
+    }
   }
 
-  const handleCardAction = (e)=>{
-    const maData = playerInfo
-    maData.conocimiento += selected?.conocimiento
-    maData.energia += selected?.energia
-    maData.social += selected?.social
-    maData.money += selected?.money
-
-    setSelected(null)
-  }
-  const handleCardBack = (e)=>{
-    setSelected(null)
+  const endTurn = () => {
+    if (currentTurn < 5) {
+      setCurrentTurn(currentTurn + 1)
+      setActionPoints(3)
+      // setCurrentEvent(null);
+    } else {
+      setIsGameOver(true)
+    }
   }
 
   return (
     <>
-    <div className='relative w-full min-h-svh bg-[url("/src/assets/FondoEspol.jpg")] bg-no-repeat bg-cover'>
-    <div className='flex gap-2 p-4 flex-wrap'>
-      <Button className='bg-green-600'> Energía {playerInfo.energia}</Button>
-      <Button className='bg-orange-500'> Conocimiento {playerInfo.conocimiento}</Button>
-      <Button className='bg-purple-700'> Relaciones Sociales {playerInfo.social}</Button>
-      <Button className='bg-yellow-500'> Dinero {playerInfo.money}</Button>
-    </div>
-    {selected && 
-        <div className='absolute w-full h-full bg-slate-500 bg-opacity-80 text-center' >
-        <div className='w-72 mx-auto mt-40' onClick={()=>handleSelected()}>
-        <Card url={selected.src} id={selected} title={selected.title} seleccionado={setSelected}/>
+      <div className='relative min-h-svh w-full bg-[url("/src/assets/FondoEspol.jpg")] bg-cover bg-no-repeat'>
+        <div className="w-96">
+          <StatsBar playerInfo={playerInfo} />
         </div>
-        <Button className='mr-6' onClick={(e)=>handleCardBack(e)}>
-          Atrás
+        <h2>
+          Turno {currentTurn}, Puntos de accion {actionPoints}
+        </h2>
+        <Button
+          className="absolute bottom-[30%] right-12 m-4 flex h-40 w-40 flex-col bg-blue-600"
+          onClick={() => handleMaze()}
+        >
+          <img src="/EspolLifeGameChoices/src/assets/deck.png" alt="Mazo" />
+          <span className="-mt-6 font-semibold">Coger Carta</span>
         </Button>
-        <Button  onClick={(e)=>handleCardAction(e)}>
-          Aplicar
-        </Button>
+        {selected && (
+          <SelectedCard
+            setSelected={setSelected}
+            selected={selected}
+            playerInfo={playerInfo}
+            setPlayerInfo={setPlayerInfo}
+          />
+        )}
+        <div className="absolute bottom-4 flex w-full flex-col items-center">
+          <Button className="mb-4 bg-gray-700" onClick={() => endTurn()}>
+            Terminar Turno
+          </Button>
+          <div className="z-1 flex flex-wrap justify-center gap-2">
+            {miMazo}
+          </div>
+        </div>
       </div>
-      }
-    <div className='flex flex-wrap gap-2'>
-      {...misCartas}
-    </div>
-
-
-      
-
-    </div>
     </>
   )
 }

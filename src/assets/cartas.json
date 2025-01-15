@@ -1,28 +1,8 @@
 {
-    "001":{
-        "id": "001",
-        "CardName": "Suit&Cofi",
-        "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
-        "src": "/src/assets/CafeSuit&Cofi.png" ,
-        "energia": 5,
-        "money": -5,
-        "conocimiento": 0,
-        "social": 0
-    },
-    "002":{
-        "id": "001",
-        "CardName": "Trabajo en Grupo",
-        "src": "/src/assets/TrabajaGrupo.png" ,
-        "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
-        "energia": 12,
-        "money": -1,
-        "conocimiento": 5,
-        "social": 5
-    },
     "003":{
-        "id": "001",
+        "id": "003",
         "CardName": "Libro Pesado",
-        "src": "/src/assets/LibroPesado.png" ,
+        "src": "/EspolLifeGameChoices/src/assets/LibroPesado.png" ,
         "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
         "energia": -4,
         "money": 0,
@@ -30,9 +10,49 @@
         "social": 0
     },
     "004":{
-        "id": "001",
+        "id": "004",
         "CardName": "Amigo Fiestero",
-        "src": "/src/assets/AmigoFiestero.png" ,
+        "src": "/EspolLifeGameChoices/src/assets/AmigoFiestero.png" ,
+        "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
+        "energia": 5,
+        "money": -1,
+        "conocimiento": 0,
+        "social": 7
+    },
+    "005":{
+        "id": "005",
+        "CardName": "Amigo Fiestero",
+        "src": "/EspolLifeGameChoices/src/assets/AmigoFiestero.png" ,
+        "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
+        "energia": 5,
+        "money": -1,
+        "conocimiento": 0,
+        "social": 7
+    },
+    "006":{
+        "id": "006",
+        "CardName": "Amigo Fiestero",
+        "src": "/EspolLifeGameChoices/src/assets/AmigoFiestero.png" ,
+        "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
+        "energia": 5,
+        "money": -1,
+        "conocimiento": 0,
+        "social": 7
+    },
+    "007":{
+        "id": "007",
+        "CardName": "Amigo Fiestero",
+        "src": "/EspolLifeGameChoices/src/assets/AmigoFiestero.png" ,
+        "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
+        "energia": 5,
+        "money": -1,
+        "conocimiento": 0,
+        "social": 7
+    },
+    "008":{
+        "id": "008",
+        "CardName": "Amigo Fiestero",
+        "src": "/EspolLifeGameChoices/src/assets/AmigoFiestero.png" ,
         "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
         "energia": 5,
         "money": -1,

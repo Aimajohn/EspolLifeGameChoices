@@ -1,31 +1,29 @@
 import cardData from "../assets/cartas.json"
 
-import React from 'react'
+import React from "react"
+import { CartaT } from "../types"
+import path, { basename } from "path"
 
 type Props = {
-  url: string,
-  title:  string,
-  id: string,
-  seleccionado: React.Dispatch<React.SetStateAction<null>>
+  id: string
+  info: CartaT
+  seleccionado: React.Dispatch<React.SetStateAction<CartaT | null>>
 }
 
-function Card({url, title, id, seleccionado}: Props) {
-  const handleCard = (e)=>{
-    const carta = cardData[id]
+function Card({ info, seleccionado }: Props) {
+  const handleCard = () => {
+    const carta = info
     seleccionado(carta)
   }
+  console.log(info.src, URL.parse(info.src, "http://127.0.0.1:5173/"))
+
   return (
-    <div className="cursor-pointer" onClick={e => handleCard(e)}>
-      <p>
-      {title}
-        </p>
-      <div className=''>
-      <img title={title} className='w-full' src={url}/>
+    <div className="cursor-pointer" onClick={() => handleCard()}>
+      <div className="">
+        <img title={info.id} className="w-full" src={info.src} />
       </div>
     </div>
   )
 }
 
 export default Card
-
- 
