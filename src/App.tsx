@@ -22,13 +22,15 @@ type CartaT = {
 
 import { infoInicial } from "@/types"
 import { HelpButton } from "./components/ui/HelpButton"
+import Suit from "@/assets/Cartas/CafeSuit&Cofi.png"
+import TrabajaGrupo from "@/assets/Cartas/TrabajaGrupo.png"
 
 const misCartas = {
   "001": {
     id: "001",
     CardName: "Suit&Cofi",
     description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
-    src: "/EspolLifeGameChoices/assets/CafeSuit&Cofi.png",
+    src: Suit,
     energia: 5,
     money: -5,
     conocimiento: 0,
@@ -37,7 +39,7 @@ const misCartas = {
   "002": {
     id: "001",
     CardName: "Trabajo en Grupo",
-    src: "/EspolLifeGameChoices/assets/TrabajaGrupo.png",
+    src: TrabajaGrupo,
     description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
     energia: 12,
     money: -1,

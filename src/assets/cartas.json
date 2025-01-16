@@ -2,7 +2,7 @@
   "003": {
     "id": "003",
     "CardName": "Libro Pesado",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
     "energia": -4,
     "money": 0,
@@ -12,7 +12,7 @@
   "004": {
     "id": "004",
     "CardName": "Amigo Fiestero",
-    "src": "/EspolLifeGameChoices/assets/AmigoFiestero.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/AmigoFiestero.png",
     "description": "Delicioso impulso energetico, aunque afecta tu presupuesto",
     "energia": 5,
     "money": -1,
@@ -22,7 +22,7 @@
   "005": {
     "id": "005",
     "CardName": "Profesor",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Guía experimentado, comparte valiosa sabiduría y conexiones clave.",
     "energia": 0,
     "money": 0,
@@ -32,7 +32,7 @@
   "006": {
     "id": "006",
     "CardName": "Amigo Estudioso",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Ideal para una tarde de estudio, pero es muy exigente.",
     "energia": -1,
     "money": 0,
@@ -42,7 +42,7 @@
   "007": {
     "id": "007",
     "CardName": "Consejo Estudiantil",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Perfecto para apoyo emocional y vínculos sociales.",
     "energia": 2,
     "money": 0,
@@ -52,7 +52,7 @@
   "008": {
     "id": "008",
     "CardName": "Hacer Deporte",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Renueva tu energía y fortalece tus contactos.",
     "energia": -1,
     "money": 0,
@@ -62,7 +62,7 @@
   "009": {
     "id": "009",
     "CardName": "Clase Extra +",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Ideal para reforzar conocimientos faltantes.",
     "energia": -1,
     "money": 0,
@@ -72,7 +72,7 @@
   "010": {
     "id": "010",
     "CardName": "Biblioteca",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Ambiente perfecto para concentrarte y encontrar calma.",
     "energia": 2,
     "money": 0,
@@ -82,7 +82,7 @@
   "011": {
     "id": "011",
     "CardName": "Calculadora",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Soluciona cálculos complejos, una inversión inteligente.",
     "energia": 0,
     "money": -2,
@@ -92,7 +92,7 @@
   "012": {
     "id": "012",
     "CardName": "Laptop",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Herramienta poderosa para aprender, pero cara de adquirir.",
     "energia": 0,
     "money": -5,
@@ -102,7 +102,7 @@
   "013": {
     "id": "013",
     "CardName": "Pack de Quizzes",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Oportunidad para aprender rápido, pero un gasto doloroso.",
     "energia": 0,
     "money": -7,
@@ -112,7 +112,7 @@
   "014": {
     "id": "014",
     "CardName": "Espresso Doble",
-    "src": "/EspolLifeGameChoices/assets/LibroPesado.png",
+    "src": "/EspolLifeGameChoices/assets/Cartas/LibroPesado.png",
     "description": "Hecho en casa. Te mantendrá despierto toda la noche.",
     "energia": 7,
     "money": -4,
