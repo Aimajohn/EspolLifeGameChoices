@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 capitalize relative",
   {
     variants: {
       variant: {
@@ -15,21 +15,37 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
         outline: "text-foreground",
+        money:
+          "rounded-full bg-yellow-400/95 text-slate-950 text-sm border-none py-1 px-3",
+        social:
+          "rounded-full bg-purple-600/95 text-slate-100 text-sm border-none py-1 px-3",
+        energia:
+          "rounded-full bg-green-500/95 text-slate-950 text-sm border-none py-1 px-3",
+        conocimiento:
+          "rounded-full bg-orange-400/95 text-slate-950 text-sm border-none py-1 px-3",
       },
     },
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 )
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+    VariantProps<typeof badgeVariants> {
+  puntos: number
+  children: string
+}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, children, variant, puntos, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div className={cn(badgeVariants({ variant }), className)} {...props}>
+      <span className="-ml-2 mr-2 block size-6 rounded-full bg-slate-800/20 text-center text-xs leading-6">
+        {puntos}
+      </span>
+      {children}
+    </div>
   )
 }
 

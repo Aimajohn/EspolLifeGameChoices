@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react"
 import "./App.css"
-import Card from "@/componentes/Card"
 import { Button } from "@/components/ui/button"
 import MazoCartas from "@/assets/cartas.json"
 import { StatsBar } from "@/components/StatsBar"
-import SelectedCard from "./componentes/SelectedCard"
 import Victoria from "@/assets/Victoria.png"
 import Derrota from "@/assets/derrota.png"
 import { Link } from "react-router-dom"
+import Deck from "@/assets/deck.png"
 
 type CartaT = {
   id: string
@@ -22,24 +21,23 @@ type CartaT = {
 
 import { infoInicial } from "@/types"
 import { HelpButton } from "./components/ui/HelpButton"
-import Suit from "@/assets/Cartas/CafeSuit&Cofi.png"
-import TrabajaGrupo from "@/assets/Cartas/TrabajaGrupo.png"
+import { ModalCard } from "./components/ModalCard"
 
 const misCartas = {
   "001": {
     id: "001",
     CardName: "Suit&Cofi",
     description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
-    src: Suit,
+    src: "/EspolLifeGameChoices/assets/Cartas/CafeSuit&Cofi.png",
     energia: 5,
     money: -5,
     conocimiento: 0,
     social: 0,
   },
   "002": {
-    id: "001",
+    id: "002",
     CardName: "Trabajo en Grupo",
-    src: TrabajaGrupo,
+    src: "/EspolLifeGameChoices/assets/Cartas/TrabajaGrupo.png",
     description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
     energia: 12,
     money: -1,
@@ -60,7 +58,6 @@ function App() {
   const [playCards, setPlayCards] = useState<mazo>(misCartas)
   const [isGameOver, setIsGameOver] = useState(false)
   const [playerInfo, setPlayerInfo] = useState(infoInicial)
-  console.log(isGameOver)
 
   useEffect(() => {
     // setChecked(true)
@@ -69,7 +66,19 @@ function App() {
   const renderJsonData = (cardData: mazo) => {
     return Object.entries(cardData).map(([key, value]) => (
       <div className="w-52" key={key}>
-        <Card info={value} id={key} seleccionado={setSelected} />
+        <ModalCard
+          playCards={playCards}
+          setPlayCards={setPlayCards}
+          setActionPoints={setActionPoints}
+          actionPoints={actionPoints}
+          setSelected={setSelected}
+          selected={selected}
+          playerInfo={playerInfo}
+          setPlayerInfo={setPlayerInfo}
+          info={value}
+          id={key}
+          seleccionado={setSelected}
+        />
       </div>
     ))
   }
@@ -145,12 +154,6 @@ function App() {
               </span>
               <span className={`flex justify-center`}>
                 <span>Puntos de accion {actionPoints}</span>
-                {/* <span
-                  className={`relative flex h-3 w-3 ${actionPoints > 0 ? "hidden" : ""}`}
-                >
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
-                  <span className="relative inline-flex h-3 w-3 rounded-full bg-sky-500"></span>
-                </span> */}
               </span>
             </h2>
           </div>
@@ -160,21 +163,9 @@ function App() {
           className="absolute bottom-[30%] right-12 m-4 flex h-40 w-40 flex-col bg-blue-600"
           onClick={() => handleMaze()}
         >
-          <img src="/EspolLifeGameChoices/src/assets/deck.png" alt="Mazo" />
+          <img src={Deck} alt="Mazo" />
           <span className="-mt-6 font-semibold">Coger Carta</span>
         </Button>
-        {selected && (
-          <SelectedCard
-            playCards={playCards}
-            setPlayCards={setPlayCards}
-            setActionPoints={setActionPoints}
-            actionPoints={actionPoints}
-            setSelected={setSelected}
-            selected={selected}
-            playerInfo={playerInfo}
-            setPlayerInfo={setPlayerInfo}
-          />
-        )}
         <section
           className={`absolute bottom-4 flex w-full flex-col items-center`}
         >
