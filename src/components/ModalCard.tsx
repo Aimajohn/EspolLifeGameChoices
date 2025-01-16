@@ -70,7 +70,7 @@ export function ModalCard({
       </DialogTrigger>
       <DialogContent className="border-slate-900/95 bg-slate-900/95 text-slate-100 shadow-md sm:max-w-[35%]">
         <div className="flex">
-          <div className="w-[60%]">
+          <div className="flex h-full w-[60%] items-center">
             <img src={info.src} alt={info.CardName} />
           </div>
           <div className="flex h-full flex-col justify-between p-4 pl-6">
@@ -80,7 +80,7 @@ export function ModalCard({
                   <DialogTitle>{info.CardName}</DialogTitle>
                   <DialogDescription>{info.description}</DialogDescription>
                 </DialogHeader>
-                <h3 className="mb-2 mt-6 font-semibold text-slate-100">
+                <h3 className="2xl:text-md mb-2 mt-6 text-sm font-semibold text-slate-100">
                   Atributos
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -95,15 +95,15 @@ export function ModalCard({
                   ]}
                 </div>
               </div>
-              <DialogFooter className="relative">
+              <DialogFooter className="relative mt-6">
                 <DialogPrimitive.Close
-                  className="h-10 rounded-md bg-slate-300/80 px-12 font-semibold text-slate-950 hover:bg-slate-300/60"
+                  className="h-10 rounded-md bg-slate-300/80 px-6 font-semibold text-slate-950 hover:bg-slate-300/60 2xl:px-12"
                   onClick={() => handleCardBack()}
                 >
                   Atrás
                 </DialogPrimitive.Close>
                 <DialogPrimitive.Close
-                  className="h-10 rounded-md bg-blue-600 px-12 font-semibold text-slate-100 hover:bg-blue-600/70 disabled:bg-blue-600/20"
+                  className="h-10 rounded-md bg-blue-600 px-6 font-semibold text-slate-100 hover:bg-blue-600/70 disabled:bg-blue-600/20 2xl:px-12"
                   type="submit"
                   onClick={() => handleCardAction()}
                   disabled={actionPoints <= 0 ? true : false}

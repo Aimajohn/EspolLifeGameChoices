@@ -65,7 +65,7 @@ function App() {
 
   const renderJsonData = (cardData: mazo) => {
     return Object.entries(cardData).map(([key, value]) => (
-      <div className="w-52" key={key}>
+      <div className="-mx-1 w-36 2xl:w-52" key={key}>
         <ModalCard
           playCards={playCards}
           setPlayCards={setPlayCards}
@@ -139,14 +139,14 @@ function App() {
         </div>
       )}
       <div
-        className={`relative min-h-svh w-full border-[1.6rem] border-slate-800 text-slate-200 ${isGameOver ? "blur-sm" : ""}`}
+        className={`relative min-h-svh w-full border-slate-800 text-slate-200 2xl:border-[1.6rem] ${isGameOver ? "blur-sm" : ""}`}
       >
-        <div className="relative z-50 w-96">
+        <div className="relative z-50 w-72 pt-4 2xl:w-96 2xl:pt-0">
           <StatsBar playerInfo={playerInfo} />
           <HelpButton />
         </div>
         <article className="absolute top-8 flex w-full">
-          <div className="mx-auto flex grow-0 rounded-sm bg-gray-900 p-6 text-2xl text-slate-200">
+          <div className="text-md mx-auto flex grow-0 rounded-sm bg-gray-900 p-4 text-slate-200/90 2xl:p-6 2xl:text-2xl">
             <h2 className="items-centers flex flex-col">
               <span>
                 Días antes del exámen {currentTurn}
@@ -159,9 +159,9 @@ function App() {
           </div>
         </article>
         <Button
-          disabled={actionPoints > 0 ? false : true}
-          className="absolute bottom-[30%] right-12 m-4 flex h-40 w-40 flex-col bg-blue-600"
+          className="absolute bottom-[30%] right-12 z-50 m-4 flex size-28 flex-col bg-blue-600 hover:bg-blue-700/95 2xl:size-40"
           onClick={() => handleMaze()}
+          disabled={actionPoints > 0 ? false : true}
         >
           <img src={Deck} alt="Mazo" />
           <span className="-mt-6 font-semibold">Coger Carta</span>
@@ -171,7 +171,7 @@ function App() {
         >
           <Button
             className={`mb-4 bg-blue-500 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
-            size={"lg"}
+            size={`lg`}
             onClick={() => endTurn()}
           >
             Terminar Turno

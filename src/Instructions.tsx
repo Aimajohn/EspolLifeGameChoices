@@ -20,7 +20,7 @@ function Instructions({}: Props) {
     <CarouselItem key={"001"}>
       <div className="p-1">
         <Steps titulo="Instrucciones">
-          <div className="text-[1.4rem] leading-relaxed">
+          <div className="leading-sm text-md 2xl:text-[1.4rem]">
             <p>
               Para esta DEMO te encuentras en la{" "}
               <b>fase final del semestre! </b> <br />
@@ -31,7 +31,7 @@ function Instructions({}: Props) {
               <div className="inline-block w-1/2">
                 <StatsBar playerInfo={playerInfo} />
               </div>
-              <div className="mt-4 w-1/2 text-[1.3rem]">
+              <div className="text-md mt-4 w-1/2 2xl:text-[1.3rem]">
                 Para superarlo debes subir tus atributos de{" "}
                 <b>conocimiento a 70 puntos</b>. <br />
                 Pero no solo eso, estudiar hasta el cansancio te impedirá
@@ -47,7 +47,7 @@ function Instructions({}: Props) {
     <CarouselItem key={"002"}>
       <div className="p-1">
         <Steps titulo="Instrucciones">
-          <div className="flex justify-between text-[1.4rem]">
+          <div className="text-md flex justify-between 2xl:text-[1.4rem]">
             <div className="w-3/5">
               <p>
                 Aumentas tus atributos jugando tus cartas, hay dos tipos eventos
