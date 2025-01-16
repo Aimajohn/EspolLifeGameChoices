@@ -5,8 +5,8 @@ import {
   CardContent,
   // CardDescription,
   // CardFooter,
-  // CardHeader,
-  // CardTitle,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card"
 
 import { PlayerInfoT } from "../types"
@@ -66,10 +66,10 @@ export function StatsBar({ playerInfo }: Props) {
     { browser: "Money", points: playerInfo.money, fill: "var(--color-money)" },
   ]
   return (
-    <Card className="border-0 pt-4 shadow-none">
-      {/* <CardHeader className="-mb-4">
+    <Card className="m-5 border-0 pt-4 shadow-none">
+      <CardHeader className="-my-4 text-center text-xl leading-none text-slate-300">
         <CardTitle>Atributos</CardTitle>
-      </CardHeader> */}
+      </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart

@@ -5,6 +5,14 @@ import { Button } from "@/components/ui/button"
 import MazoCartas from "@/assets/cartas.json"
 import { StatsBar } from "@/components/StatsBar"
 import SelectedCard from "./componentes/SelectedCard"
+import Victoria from "@/assets/Victoria.png"
+import Derrota from "@/assets/derrota.png"
+import { Link } from "react-router-dom"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
 
 type CartaT = {
   id: string
@@ -16,6 +24,9 @@ type CartaT = {
   conocimiento: number
   social: number
 }
+
+import { infoInicial } from "@/types"
+import { HelpButton } from "./components/ui/HelpButton"
 
 const misCartas = {
   "001": {
@@ -51,12 +62,7 @@ function App() {
   const [selected, setSelected] = useState<CartaT | null>(null)
   const [playCards, setPlayCards] = useState<mazo>(misCartas)
   const [isGameOver, setIsGameOver] = useState(false)
-  const [playerInfo, setPlayerInfo] = useState({
-    energia: 50,
-    money: 50,
-    conocimiento: 50,
-    social: 50,
-  })
+  const [playerInfo, setPlayerInfo] = useState(infoInicial)
   console.log(isGameOver)
 
   useEffect(() => {
@@ -93,22 +99,67 @@ function App() {
     }
   }
 
+  const checkVictory = (): boolean => {
+    const { conocimiento, ...otherStats } = playerInfo
+    const highStats = Object.values(otherStats).filter((stat) => stat >= 60)
+    return conocimiento >= 70 && highStats.length >= 2
+  }
+
   return (
-    <>
-      <div className="relative min-h-svh w-full border-[1.6rem] border-slate-800 text-slate-200">
-        <div className="w-96">
+    <main className="relative">
+      {isGameOver && (
+        <div className="absolute top-20 z-50 ml-[30%] flex w-[40%] flex-col items-center rounded-md bg-slate-900 p-12 text-slate-200">
+          <h2 className="text-center text-3xl font-semibold">
+            {checkVictory() ? "¡Victoria!" : "Derrota"}
+          </h2>
+          <div className="mx-auto my-4 w-96">
+            <img
+              src={isGameOver && checkVictory() ? Victoria : Derrota}
+              alt="GameOver"
+            />
+          </div>
+          <p className="text-center text-lg">
+            Conocimiento Académico final: {playerInfo.conocimiento}%
+          </p>
+          <Link to={"/"}>
+            <Button
+              className="mt-4 bg-gray-600 hover:bg-gray-800"
+              size="amongus"
+              onClick={() => setPlayerInfo(infoInicial)}
+            >
+              Volver a Jugar
+            </Button>
+          </Link>
+        </div>
+      )}
+      <div
+        className={`relative min-h-svh w-full border-[1.6rem] border-slate-800 text-slate-200 ${isGameOver ? "blur-sm" : ""}`}
+      >
+        <div className="relative z-50 w-96">
           <StatsBar playerInfo={playerInfo} />
+          <HelpButton />
         </div>
         <article className="absolute top-8 flex w-full">
-          <div className="mx-auto grow-0 rounded-sm bg-gray-900 p-6 text-2xl text-slate-200">
-            <h2 className="text-center">
-              Días antes del exámen {currentTurn}
-              <br />
-              Puntos de accion {actionPoints}
+          <div className="mx-auto flex grow-0 rounded-sm bg-gray-900 p-6 text-2xl text-slate-200">
+            <h2 className="items-centers flex flex-col">
+              <span>
+                Días antes del exámen {currentTurn}
+                <br />
+              </span>
+              <span className={`flex justify-center`}>
+                <span>Puntos de accion {actionPoints}</span>
+                {/* <span
+                  className={`relative flex h-3 w-3 ${actionPoints > 0 ? "hidden" : ""}`}
+                >
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-sky-500"></span>
+                </span> */}
+              </span>
             </h2>
           </div>
         </article>
         <Button
+          disabled={actionPoints > 0 ? false : true}
           className="absolute bottom-[30%] right-12 m-4 flex h-40 w-40 flex-col bg-blue-600"
           onClick={() => handleMaze()}
         >
@@ -127,9 +178,11 @@ function App() {
             setPlayerInfo={setPlayerInfo}
           />
         )}
-        <section className="absolute bottom-4 flex w-full flex-col items-center">
+        <section
+          className={`absolute bottom-4 flex w-full flex-col items-center`}
+        >
           <Button
-            className="mb-4 bg-blue-500"
+            className={`mb-4 bg-blue-500 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
             size={"lg"}
             onClick={() => endTurn()}
           >
@@ -140,7 +193,7 @@ function App() {
           </div>
         </section>
       </div>
-    </>
+    </main>
   )
 }
 

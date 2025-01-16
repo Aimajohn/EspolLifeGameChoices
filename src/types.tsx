@@ -8,10 +8,16 @@ export interface PlayerStats {
 }
 
 export const playerInfo = {
-  energia: 50,
-  money: 40,
-  conocimiento: 40,
-  social: 80,
+  energia: 70,
+  money: 70,
+  conocimiento: 68,
+  social: 70,
+}
+export const infoInicial = {
+  energia: 65,
+  money: 70,
+  conocimiento: 65,
+  social: 70,
 }
 export interface Card {
   id: string
