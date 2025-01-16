@@ -8,11 +8,6 @@ import SelectedCard from "./componentes/SelectedCard"
 import Victoria from "@/assets/Victoria.png"
 import Derrota from "@/assets/derrota.png"
 import { Link } from "react-router-dom"
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card"
 
 type CartaT = {
   id: string
@@ -33,7 +28,7 @@ const misCartas = {
     id: "001",
     CardName: "Suit&Cofi",
     description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
-    src: "/EspolLifeGameChoices/src/assets/CafeSuit&Cofi.png",
+    src: "/EspolLifeGameChoices/assets/CafeSuit&Cofi.png",
     energia: 5,
     money: -5,
     conocimiento: 0,
@@ -42,7 +37,7 @@ const misCartas = {
   "002": {
     id: "001",
     CardName: "Trabajo en Grupo",
-    src: "/EspolLifeGameChoices/src/assets/TrabajaGrupo.png",
+    src: "/EspolLifeGameChoices/assets/TrabajaGrupo.png",
     description: "Delicioso impulso energetico, aunque afecta tu presupuesto",
     energia: 12,
     money: -1,

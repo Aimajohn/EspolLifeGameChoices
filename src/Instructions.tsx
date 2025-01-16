@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Steps } from "@/components/Steps"
 import { StatsBar } from "./components/StatsBar"
 import { playerInfo } from "./types"

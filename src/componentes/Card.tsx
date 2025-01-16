@@ -14,7 +14,6 @@ function Card({ info, seleccionado }: Props) {
     const carta = info
     seleccionado(carta)
   }
-  console.log(info.src, URL.parse(info.src, "http://127.0.0.1:5173/"))
 
   return (
     <div className="cursor-pointer" onClick={() => handleCard()}>
