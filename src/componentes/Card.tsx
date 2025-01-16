@@ -1,8 +1,7 @@
-import cardData from "../assets/cartas.json"
+// import cardData from "../assets/cartas.json"
 
 import React from "react"
 import { CartaT } from "../types"
-import path, { basename } from "path"
 
 type Props = {
   id: string

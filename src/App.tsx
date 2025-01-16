@@ -45,7 +45,7 @@ type mazo = {
 }
 
 function App() {
-  const [currentTurn, setCurrentTurn] = useState(1)
+  const [currentTurn, setCurrentTurn] = useState(5)
   const [playDeck, setplayDeck] = useState<CartaT[]>(Object.values(MazoCartas))
   const [actionPoints, setActionPoints] = useState(3)
   const [selected, setSelected] = useState<CartaT | null>(null)
@@ -57,6 +57,7 @@ function App() {
     conocimiento: 50,
     social: 50,
   })
+  console.log(isGameOver)
 
   useEffect(() => {
     // setChecked(true)
@@ -83,8 +84,8 @@ function App() {
   }
 
   const endTurn = () => {
-    if (currentTurn < 5) {
-      setCurrentTurn(currentTurn + 1)
+    if (currentTurn > 0) {
+      setCurrentTurn(currentTurn - 1)
       setActionPoints(3)
       // setCurrentEvent(null);
     } else {
@@ -94,13 +95,19 @@ function App() {
 
   return (
     <>
-      <div className='relative min-h-svh w-full bg-[url("/src/assets/FondoEspol.jpg")] bg-cover bg-no-repeat'>
+      <div className="relative min-h-svh w-full border-[1.6rem] border-slate-800 text-slate-200">
         <div className="w-96">
           <StatsBar playerInfo={playerInfo} />
         </div>
-        <h2>
-          Turno {currentTurn}, Puntos de accion {actionPoints}
-        </h2>
+        <article className="absolute top-8 flex w-full">
+          <div className="mx-auto grow-0 rounded-sm bg-gray-900 p-6 text-2xl text-slate-200">
+            <h2 className="text-center">
+              Días antes del exámen {currentTurn}
+              <br />
+              Puntos de accion {actionPoints}
+            </h2>
+          </div>
+        </article>
         <Button
           className="absolute bottom-[30%] right-12 m-4 flex h-40 w-40 flex-col bg-blue-600"
           onClick={() => handleMaze()}
@@ -110,20 +117,28 @@ function App() {
         </Button>
         {selected && (
           <SelectedCard
+            playCards={playCards}
+            setPlayCards={setPlayCards}
+            setActionPoints={setActionPoints}
+            actionPoints={actionPoints}
             setSelected={setSelected}
             selected={selected}
             playerInfo={playerInfo}
             setPlayerInfo={setPlayerInfo}
           />
         )}
-        <div className="absolute bottom-4 flex w-full flex-col items-center">
-          <Button className="mb-4 bg-gray-700" onClick={() => endTurn()}>
+        <section className="absolute bottom-4 flex w-full flex-col items-center">
+          <Button
+            className="mb-4 bg-blue-500"
+            size={"lg"}
+            onClick={() => endTurn()}
+          >
             Terminar Turno
           </Button>
           <div className="z-1 flex flex-wrap justify-center gap-2">
             {miMazo}
           </div>
-        </div>
+        </section>
       </div>
     </>
   )
