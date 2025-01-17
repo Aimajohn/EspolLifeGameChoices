@@ -1,0 +1,37 @@
+{
+  "R001": {
+    "name": "Tarea Extra",
+    "difficulty": 2,
+    "description": "Tu profesor dice que por falta de tiempo tendra que adelantar una tarea adicional.",
+    "src": "/EspolLifeGameChoices/assets/Cartas/TareaExtra.png",
+    "requiredCard": {
+      "conocimiento": 1
+    },
+    "requiredStat": {},
+    "fail": {
+      "energia": -1
+    },
+    "succeed": {
+      "conocimiento": 15,
+      "energia": -5
+    }
+  },
+  "R002": {
+    "name": "Copia Examen",
+    "difficulty": 3,
+    "description": "No estudiaste y necesitas pasar este exáme cueste lo que cueste.",
+    "src": "/EspolLifeGameChoices/assets/Cartas/CopiarExamen.png",
+    "requiredCard": {},
+    "requiredStat": {
+      "social": 80
+    },
+    "fail": {
+      "energia": -10,
+      "social": -30
+    },
+    "succeed": {
+      "conocimiento": 15,
+      "social": 5
+    }
+  }
+}

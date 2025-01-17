@@ -9,7 +9,7 @@ import Instructions from "./Instructions.tsx"
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HashRouter>
-      <div className="min-h-svh bg-[url('/src/assets/FondoEspol.jpg')] bg-cover bg-no-repeat">
+      <div className="min-h-svh bg-[url('/src/assets/FondoEspol.jpg')] bg-cover bg-no-repeat px-6">
         <Routes>
           <Route path="/" index element={<Instructions />} />
           <Route path="/Game" index element={<App />} />

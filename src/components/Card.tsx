@@ -6,7 +6,7 @@ import { CartaT } from "../types"
 type Props = {
   id: string
   info: CartaT
-  seleccionado: React.Dispatch<React.SetStateAction<CartaT | null>>
+  seleccionado?: React.Dispatch<React.SetStateAction<CartaT | null>>
 }
 
 function Card({ info }: Props) {
