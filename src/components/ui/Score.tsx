@@ -45,7 +45,7 @@ function Score({ tableCards }: Props) {
   }, [tableCards])
 
   return (
-    <div className="mt-2 flex w-32 flex-col flex-wrap gap-2">
+    <div className="mt-2 flex justify-end gap-2">
       {[
         categorias.map((a) =>
           Score[a] != 0 ? (

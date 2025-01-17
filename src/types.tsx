@@ -7,7 +7,7 @@ export const playerInfo = {
 export const infoInicial = {
   energia: 50,
   money: 60,
-  conocimiento: 50,
+  conocimiento: 60,
   social: 70,
 }
 export type mazo = {

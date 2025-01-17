@@ -75,8 +75,8 @@ function Instructions({}: Props) {
   ]
 
   return (
-    <main className="pt-40">
-      <div className="mx-auto w-[50%]">
+    <main className="flex h-svh items-center bg-indigo-950/30 transition">
+      <div className="mx-auto -mt-20 w-[50%]">
         <Carousel className="w-full">
           <CarouselContent>{bloques}</CarouselContent>
           <CarouselPrevious />

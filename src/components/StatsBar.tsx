@@ -66,7 +66,7 @@ export function StatsBar({ playerInfo }: Props) {
     { browser: "Dinero", points: playerInfo.money, fill: "var(--color-money)" },
   ]
   return (
-    <Card className="mr-6 border-0 pt-4 shadow-none">
+    <Card className="mx-6 border-0 pt-4 shadow-none">
       <CardHeader className="-my-4 text-center leading-none text-slate-300 2xl:text-xl">
         <CardTitle>Atributos</CardTitle>
       </CardHeader>

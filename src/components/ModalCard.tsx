@@ -37,8 +37,6 @@ export function ModalCard({
   setSelected,
   playCards,
   selected,
-  playerInfo,
-  setPlayerInfo,
   setActionPoints,
   setPlayCards,
   actionPoints,

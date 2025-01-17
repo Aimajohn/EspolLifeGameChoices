@@ -117,9 +117,9 @@ function App() {
         </article>
       )}
       <main
-        className={`relative min-h-svh w-full text-slate-200 ${isGameOver ? "blur-sm" : ""}`}
+        className={`relative min-h-svh w-full bg-indigo-950/30 text-slate-200 ${isGameOver ? "blur-sm" : ""}`}
       >
-        <section id="TopSection">
+        <section id="TopSection" className="relative">
           <div className="absolute top-6 z-50 w-72 2xl:w-80">
             <StatsBar playerInfo={playerInfo} />
             <HelpButton />
@@ -127,13 +127,15 @@ function App() {
           <TimeChart currentTurn={currentTurn} actionPoints={actionPoints} />
         </section>
 
-        <article className="absolute top-[30%] z-50 flex w-full justify-center gap-4">
-          <div className="flex h-56 max-h-56 w-2/5 items-center bg-orange-900/50">
+        <article className="absolute top-1/4 flex w-full flex-col items-center gap-4">
+          <div className="h-10 w-1/3">
+            <Score tableCards={tableCards} />
+          </div>
+          <div className="flex h-60 max-h-60 w-1/3 items-center bg-slate-700/80">
             {Object.keys(tableCards).length != 0 ? (
               <Table tableCards={tableCards} />
             ) : null}
           </div>
-          <Score tableCards={tableCards} />
         </article>
         <section
           id="Cards&Deck"

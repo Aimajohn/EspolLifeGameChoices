@@ -8,7 +8,7 @@ type Props = {
   seleccionado?: React.Dispatch<React.SetStateAction<CartaT | null>>
 }
 
-function PseudoCard({ id, info, seleccionado }: Props) {
+function PseudoCard({ info, seleccionado }: Props) {
   const categories = ["conocimiento", "energia", "social", "money"] as const
 
   return (
