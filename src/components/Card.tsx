@@ -1,12 +1,10 @@
 // import cardData from "../assets/cartas.json"
 
-import React from "react"
 import { CartaT } from "../types"
 
 type Props = {
   id: string
   info: CartaT
-  seleccionado?: React.Dispatch<React.SetStateAction<CartaT | null>>
 }
 
 function Card({ info }: Props) {

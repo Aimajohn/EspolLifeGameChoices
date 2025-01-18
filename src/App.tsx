@@ -1,112 +1,49 @@
-import { infoInicial, mazo, CartaT, initialHand } from "@/types"
-import { Link, useNavigate } from "react-router-dom"
+import { mazo, CartaT } from "@/types"
 import { lazy, useState, useEffect } from "react"
-import MazoCartas from "@/assets/cartas.json"
-import Victoria from "@/assets/Victoria.png"
-import Derrota from "@/assets/derrota.png"
-import Deck from "@/assets/deck.png"
 import { Button } from "@/components/ui/button"
 import { HelpButton } from "./components/ui/HelpButton"
 import Score from "./components/ui/Score"
 import Table from "./components/Table"
 import TimeChart from "@/components/TimeChart"
+import GameOver from "@/components/GameOver.tsx"
 import { ModalCard } from "./components/ModalCard"
-import { FaQuestion } from "react-icons/fa"
-import { TodasCartas } from "./TodasCartas"
-import { calcScore, deepCopy } from "@/types.tsx"
 import "./App.css"
 const StatsBar = lazy(() => import("./components/StatsBar.tsx"))
+import { useCardStore, useStatStore } from "@/AStore/AStore.ts"
+import DeckButton from "./components/DeckButton.tsx"
 
 function App() {
-  const [playDeck, setplayDeck] = useState<CartaT[]>([])
-  const [tableCards, setTableCards] = useState<mazo>({})
-  const [playCards, setPlayCards] = useState<mazo>(initialHand)
-  const [playerInfo, setPlayerInfo] = useState(infoInicial)
-  const [currentTurn, setCurrentTurn] = useState(5)
-  const [actionPoints, setActionPoints] = useState(3)
-  const [isGameOver, setIsGameOver] = useState(false)
   const [selected, setSelected] = useState<CartaT | null>(null)
-  const navegador = useNavigate()
 
+  //Estado de CardStore
+  const playCards = useCardStore((state) => state.playCards)
+  const tableCards = useCardStore((state) => state.tableCards)
+  const setInitialDeck = useCardStore((state) => state.setInitialDeck)
+
+  //Estado de Stats
+  const actionPoints = useStatStore((state) => state.actionPoints)
+  const endTurn = useStatStore((state) => state.endTurn)
+  const playerInfo = useStatStore((state) => state.playerInfo)
+  const isGameOver = useStatStore((state) => state.isGameOver)
+  const setInitialStats = useStatStore((state) => state.setInitialStats)
+
+  //----------------
   useEffect(() => {
-    const miDeck = async () => {
-      try {
-        const maCopy = await deepCopy(MazoCartas)
-        setplayDeck(Object.values(maCopy))
-      } catch {
-        console.warn("no se hizo bien la deepCopy")
-        setplayDeck(Object.values(MazoCartas))
-      }
+    try {
+      setInitialStats()
+      setInitialDeck()
+    } catch {
+      console.error("upsie")
     }
-    miDeck()
   }, [])
-
-  const handleTableCards = (card: CartaT) => {
-    setTableCards({ ...tableCards, [card.id]: card })
-  }
 
   const renderJsonData = (cardData: mazo) => {
     return Object.entries(cardData).map(([key, value]) => (
       <div className="-mx-1 w-36 2xl:w-52" key={key}>
-        <ModalCard
-          playCards={playCards}
-          setPlayCards={setPlayCards}
-          setActionPoints={setActionPoints}
-          actionPoints={actionPoints}
-          setSelected={setSelected}
-          selected={selected}
-          playerInfo={playerInfo}
-          setPlayerInfo={setPlayerInfo}
-          info={value}
-          id={key}
-          seleccionado={setSelected}
-          setTableCards={handleTableCards}
-        />
+        <ModalCard info={value} setSelected={setSelected} selected={selected} />
       </div>
     ))
   }
-
-  const handleMaze = () => {
-    if (playDeck.length > 0 && actionPoints > 0) {
-      const randomIndex = Math.floor(Math.random() * playDeck.length)
-      const drawnCard = playDeck[randomIndex]
-      setplayDeck(playDeck.filter((_, index) => index !== randomIndex))
-      setPlayCards({ ...playCards, [drawnCard.id]: drawnCard })
-      setActionPoints(actionPoints - 1)
-    }
-  }
-
-  const endTurn = () => {
-    if (currentTurn > 0) {
-      setCurrentTurn(currentTurn - 1)
-      setActionPoints(3)
-      const maData = playerInfo
-      const tableScore = calcScore(tableCards)
-      if (Object.values(tableCards).length != 0) {
-        maData.conocimiento += tableScore?.conocimiento
-        maData.energia += tableScore?.energia
-        maData.social += tableScore?.social
-        maData.money += tableScore?.money
-      }
-      setPlayerInfo(maData)
-      setTableCards({})
-      // setCurrentEvent(null);
-    } else {
-      setIsGameOver(true)
-    }
-  }
-
-  const checkVictory = (): boolean => {
-    const { conocimiento, ...otherStats } = playerInfo
-    const highStats = Object.values(otherStats).filter((stat) => stat >= 60)
-    return conocimiento >= 70 && highStats.length >= 2
-  }
-
-  const handleResetGame = () => {
-    navegador("/")
-    window.location.reload()
-  }
-
   const miMazo = renderJsonData(playCards)
 
   return (
@@ -114,29 +51,9 @@ function App() {
       {isGameOver && (
         <article
           id="GameOverModal"
-          className="absolute top-20 z-50 ml-[30%] flex w-2/5 flex-col items-center rounded-md bg-slate-900 p-12 text-slate-200"
+          className="absolute top-20 z-50 ml-[30%] w-2/5"
         >
-          <h2 className="text-center text-3xl font-semibold">
-            {checkVictory() ? "¡Victoria!" : "Derrota"}
-          </h2>
-          <div className="mx-auto my-4 w-52 2xl:w-96">
-            <img
-              src={isGameOver && checkVictory() ? Victoria : Derrota}
-              alt="GameOver"
-            />
-          </div>
-          <p className="text-center text-lg">
-            Conocimiento Académico final: {playerInfo.conocimiento}%
-          </p>
-          <Link to={"/"}>
-            <Button
-              className="mt-4 bg-gray-600 hover:bg-gray-800"
-              size="amongus"
-              onClick={() => handleResetGame()}
-            >
-              Volver a Jugar
-            </Button>
-          </Link>
+          <GameOver />
         </article>
       )}
       <main
@@ -147,49 +64,33 @@ function App() {
             <StatsBar playerInfo={playerInfo} />
             <HelpButton />
           </div>
-          <TimeChart currentTurn={currentTurn} actionPoints={actionPoints} />
+          <TimeChart />
         </section>
 
-        <article className="absolute top-28 flex w-full transform flex-col items-center gap-4 2xl:top-1/4">
+        <article
+          id="TableSection"
+          className="absolute top-28 flex w-full transform flex-col items-center gap-4 2xl:top-1/4"
+        >
           <div className="-mb-2 h-10 w-1/3 min-w-[30rem]">
-            <Score tableCards={tableCards} />
+            <Score />
           </div>
           <div className="flex h-52 w-1/3 min-w-[30rem] items-center bg-slate-700/80 2xl:h-60 2xl:max-h-60">
-            {Object.keys(tableCards).length != 0 ? (
-              <Table tableCards={tableCards} />
-            ) : null}
+            {Object.keys(tableCards).length != 0 ? <Table /> : null}
           </div>
         </article>
+
         <section
           id="Cards&Deck"
-          className={`absolute bottom-4 flex w-full flex-col items-center`}
+          className="absolute bottom-4 flex w-full flex-col items-center"
         >
           <div className="absolute -top-[30%] right-12 z-50 m-4">
-            <Button
-              className="flex size-28 flex-col bg-blue-600 hover:bg-blue-700/95 2xl:size-40"
-              onClick={() => handleMaze()}
-              disabled={
-                actionPoints > 0 && Object.values(playCards).length < 7
-                  ? false
-                  : true
-              }
-            >
-              <img src={Deck} alt="Mazo" />
-              <span className="-mt-6 font-semibold">Coger Carta</span>
-            </Button>
-            <TodasCartas>
-              <Button
-                size={"icon"}
-                className="absolute -right-6 -top-6 bg-blue-950 hover:bg-blue-950/60"
-              >
-                <FaQuestion />
-              </Button>
-            </TodasCartas>
+            <DeckButton />
           </div>
           <Button
             className={`bg-blue-700 hover:bg-blue-800/90 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
             size={`lg`}
             onClick={() => endTurn()}
+            type="button"
           >
             Terminar Turno
           </Button>
@@ -200,7 +101,7 @@ function App() {
               </span>
             )}
           </span>
-          <div className="z-1 flex h-72 min-w-[30%] flex-wrap justify-center gap-2">
+          <div className="z-1 flex h-48 min-w-[30%] flex-wrap justify-center gap-2 2xl:h-72">
             {miMazo}
           </div>
         </section>

@@ -53,7 +53,7 @@ function SelectedCard({
   return (
     <div className="absolute top-0 z-10 h-full w-full bg-slate-500 bg-opacity-80 text-center">
       <div className="mx-auto mt-40 w-72" onClick={() => handleSelected()}>
-        <Card id={selected.id} info={selected} seleccionado={setSelected} />
+        <Card id={selected.id} info={selected} />
       </div>
       <Button className="mr-6" onClick={() => handleCardBack()}>
         Atrás

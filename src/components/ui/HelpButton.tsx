@@ -16,7 +16,7 @@ export function HelpButton() {
         <Button
           onClick={() => navegador("/Instructions")}
           size="bigIcon"
-          className="absolute right-8 top-2 z-50 mt-4 bg-gray-600 hover:bg-gray-500 2xl:mt-0"
+          className="absolute right-8 top-2 z-50 bg-gray-600 hover:bg-gray-500"
         >
           <FaQuestion />
         </Button>

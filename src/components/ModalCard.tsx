@@ -9,45 +9,33 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import Card from "./Card"
-import { CartaT, PlayerInfoT, mazo } from "@/types"
+import { CartaT } from "@/types"
 
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Badge } from "@/components/ui/badge"
 import PseudoCard from "./PseudoCard"
 
+import { useCardStore, useStatStore } from "@/AStore/AStore"
+
 type Props = {
-  id: string
   info: CartaT
-  seleccionado: React.Dispatch<React.SetStateAction<CartaT | null>>
-  setSelected: React.Dispatch<React.SetStateAction<CartaT | null>>
   selected: CartaT | null
-  playerInfo: PlayerInfoT
-  setPlayerInfo: React.Dispatch<React.SetStateAction<PlayerInfoT>>
-  setActionPoints: React.Dispatch<React.SetStateAction<number>>
-  setPlayCards: React.Dispatch<React.SetStateAction<mazo>>
-  actionPoints: number
-  playCards: mazo
-  setTableCards: (card: CartaT) => void
+  setSelected: React.Dispatch<React.SetStateAction<CartaT | null>>
 }
 
-export function ModalCard({
-  info,
-  seleccionado,
-  id,
-  setSelected,
-  playCards,
-  selected,
-  setActionPoints,
-  setPlayCards,
-  actionPoints,
-  setTableCards,
-}: Props) {
+export function ModalCard({ info, setSelected, selected }: Props) {
+  const playCards = useCardStore((state) => state.playCards)
+  const setPlayCards = useCardStore((state) => state.setPlayCards)
+  const setActionPoints = useStatStore((state) => state.setActionPoints)
+  const actionPoints = useStatStore((state) => state.actionPoints)
+  const setTableCards = useCardStore((state) => state.handleTableCards)
   const handleCardAction = () => {
+    console.log("not understnding")
     if (actionPoints > 0) {
       if (!selected) return null
-      setActionPoints(actionPoints - 1)
-      let helperSet = playCards
+      setActionPoints(-1)
       setTableCards(selected)
+      let helperSet = playCards
       delete helperSet[selected.id]
       setPlayCards(helperSet)
       setSelected(null)
@@ -62,9 +50,9 @@ export function ModalCard({
       <DialogTrigger asChild>
         <Button size={"fit"} onClick={() => setSelected(info)} variant="fit">
           {info.src != "" ? (
-            <Card info={info} seleccionado={seleccionado} id={id} />
+            <Card info={info} id={info.id} />
           ) : (
-            <PseudoCard info={info} id={id} seleccionado={seleccionado} />
+            <PseudoCard info={info} id={info.id} />
           )}
         </Button>
       </DialogTrigger>
@@ -104,7 +92,6 @@ export function ModalCard({
                 </DialogPrimitive.Close>
                 <DialogPrimitive.Close
                   className="h-10 rounded-md bg-blue-600 px-6 font-semibold text-slate-100 hover:bg-blue-600/70 disabled:bg-blue-600/20 2xl:px-12"
-                  type="submit"
                   onClick={() => handleCardAction()}
                   disabled={actionPoints <= 0 ? true : false}
                 >

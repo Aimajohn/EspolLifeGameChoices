@@ -21,7 +21,7 @@ export const categorias = [
   "money",
 ] as const
 
-export const deepCopy = async (cartas: mazo) => {
+export const deepCopy = async (cartas: any) => {
   try {
     const copia = await JSON.parse(JSON.stringify(cartas))
     return copia as mazo

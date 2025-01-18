@@ -1,9 +1,10 @@
-type Props = {
-  currentTurn: number
-  actionPoints: number
-}
+import { useStatStore } from "@/AStore/AStore"
 
-function TimeChart({ currentTurn, actionPoints }: Props) {
+type Props = {}
+
+function TimeChart({}: Props) {
+  const currentTurn = useStatStore((state) => state.currentTurn)
+  const actionPoints = useStatStore((state) => state.actionPoints)
   return (
     <article className="absolute top-8 flex w-full">
       <div className="text-md mx-auto flex grow-0 rounded-sm bg-gray-900 p-4 text-slate-200/90 2xl:p-6 2xl:text-2xl">

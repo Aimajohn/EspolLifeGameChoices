@@ -22,7 +22,7 @@ const buttonVariants = cva(
         fit: " bg-none  hover:bg-blue-700 hover:bg-opacity-80",
       },
       size: {
-        fit: "h-full w-full p-1",
+        fit: "w-full p-1",
         amongus: "px-20 py-4 text-xl",
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",

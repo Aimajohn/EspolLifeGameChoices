@@ -1,11 +1,9 @@
-import { mazo } from "@/types"
 import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { calcScore, categorias } from "@/types"
+import { useCardStore } from "@/AStore/AStore"
 
-type Props = {
-  tableCards: mazo
-}
+type Props = {}
 const base = {
   conocimiento: 0,
   energia: 0,
@@ -13,7 +11,8 @@ const base = {
   money: 0,
 }
 
-function Score({ tableCards }: Props) {
+function Score({}: Props) {
+  const tableCards = useCardStore((state) => state.tableCards)
   //   const [values, setValues] = useState(base)
 
   const [Score, setScore] = useState(base)

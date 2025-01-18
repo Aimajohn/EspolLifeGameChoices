@@ -18,9 +18,9 @@ type Props = {
 
 export function TodasCartas({ children }: Props) {
   const awa: JSX.Element[] = []
-  Object.values({ ...Cartas, ...initialHand }).map((info) =>
+  Object.values({ ...initialHand, ...Cartas }).map((info) =>
     awa.push(
-      <div className="h-72 w-48" key={info.id}>
+      <div className="w-32 2xl:h-72 2xl:w-48" key={info.id}>
         {info.src != "" ? (
           <Card info={info} id={info.id} />
         ) : (
@@ -35,11 +35,11 @@ export function TodasCartas({ children }: Props) {
       <DialogContent className="max-h-[85svh] min-w-[75svw] border-none bg-slate-900 shadow-lg">
         <DialogHeader>
           <DialogTitle>
-            <div className="flex items-center gap-4 px-12 pt-6 text-lg">
-              <DialogPrimitive.Close className="flex size-12 items-center justify-center rounded-full bg-slate-200 p-2 text-lg hover:bg-slate-300/70">
+            <div className="flex items-center gap-4 px-12 text-lg 2xl:pt-6">
+              <DialogPrimitive.Close className="flex size-8 items-center justify-center rounded-full bg-slate-200 p-2 text-lg hover:bg-slate-300/70 2xl:size-12">
                 <IoCaretBackOutline className="-ml-1" size={40} />
               </DialogPrimitive.Close>
-              <h1 className="text-3xl font-bold text-slate-200">
+              <h1 className="text-xl font-bold text-slate-200 2xl:text-3xl">
                 Todas las cartas
               </h1>
             </div>

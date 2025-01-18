@@ -1,12 +1,12 @@
-import { mazo } from "@/types"
 import Card from "@/components/Card"
 import PseudoCard from "@/components/PseudoCard"
+import { useCardStore } from "@/AStore/AStore"
 
-type Props = {
-  tableCards: mazo
-}
+type Props = {}
 
-function Table({ tableCards }: Props) {
+function Table({}: Props) {
+  const tableCards = useCardStore((state) => state.tableCards)
+
   return (
     <div className="flex w-full justify-center gap-4 rounded-lg p-6">
       {Object.values(tableCards).map((carta) =>
