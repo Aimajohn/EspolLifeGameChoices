@@ -18,14 +18,14 @@ import "./App.css"
 const StatsBar = lazy(() => import("./components/StatsBar.tsx"))
 
 function App() {
-  const [currentTurn, setCurrentTurn] = useState(5)
   const [playDeck, setplayDeck] = useState<CartaT[]>([])
-  const [actionPoints, setActionPoints] = useState(3)
-  const [selected, setSelected] = useState<CartaT | null>(null)
-  const [playCards, setPlayCards] = useState<mazo>(initialHand)
   const [tableCards, setTableCards] = useState<mazo>({})
-  const [isGameOver, setIsGameOver] = useState(false)
+  const [playCards, setPlayCards] = useState<mazo>(initialHand)
   const [playerInfo, setPlayerInfo] = useState(infoInicial)
+  const [currentTurn, setCurrentTurn] = useState(5)
+  const [actionPoints, setActionPoints] = useState(3)
+  const [isGameOver, setIsGameOver] = useState(false)
+  const [selected, setSelected] = useState<CartaT | null>(null)
   const navegador = useNavigate()
 
   useEffect(() => {
