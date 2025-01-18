@@ -1,6 +1,6 @@
 import { infoInicial, mazo, CartaT, initialHand } from "@/types"
-import { Link } from "react-router-dom"
-import { lazy, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { lazy, useState, useEffect } from "react"
 import MazoCartas from "@/assets/cartas.json"
 import Victoria from "@/assets/Victoria.png"
 import Derrota from "@/assets/derrota.png"
@@ -13,18 +13,33 @@ import TimeChart from "@/components/TimeChart"
 import { ModalCard } from "./components/ModalCard"
 import { FaQuestion } from "react-icons/fa"
 import { TodasCartas } from "./TodasCartas"
+import { calcScore, deepCopy } from "@/types.tsx"
 import "./App.css"
 const StatsBar = lazy(() => import("./components/StatsBar.tsx"))
 
 function App() {
   const [currentTurn, setCurrentTurn] = useState(5)
-  const [playDeck, setplayDeck] = useState<CartaT[]>(Object.values(MazoCartas))
+  const [playDeck, setplayDeck] = useState<CartaT[]>([])
   const [actionPoints, setActionPoints] = useState(3)
   const [selected, setSelected] = useState<CartaT | null>(null)
   const [playCards, setPlayCards] = useState<mazo>(initialHand)
   const [tableCards, setTableCards] = useState<mazo>({})
   const [isGameOver, setIsGameOver] = useState(false)
   const [playerInfo, setPlayerInfo] = useState(infoInicial)
+  const navegador = useNavigate()
+
+  useEffect(() => {
+    const miDeck = async () => {
+      try {
+        const maCopy = await deepCopy(MazoCartas)
+        setplayDeck(Object.values(maCopy))
+      } catch {
+        console.warn("no se hizo bien la deepCopy")
+        setplayDeck(Object.values(MazoCartas))
+      }
+    }
+    miDeck()
+  }, [])
 
   const handleTableCards = (card: CartaT) => {
     setTableCards({ ...tableCards, [card.id]: card })
@@ -65,13 +80,14 @@ function App() {
     if (currentTurn > 0) {
       setCurrentTurn(currentTurn - 1)
       setActionPoints(3)
-
       const maData = playerInfo
-      if (selected == null) return
-      maData.conocimiento += selected?.conocimiento
-      maData.energia += selected?.energia
-      maData.social += selected?.social
-      maData.money += selected?.money
+      const tableScore = calcScore(tableCards)
+      if (Object.values(tableCards).length != 0) {
+        maData.conocimiento += tableScore?.conocimiento
+        maData.energia += tableScore?.energia
+        maData.social += tableScore?.social
+        maData.money += tableScore?.money
+      }
       setPlayerInfo(maData)
       setTableCards({})
       // setCurrentEvent(null);
@@ -84,6 +100,11 @@ function App() {
     const { conocimiento, ...otherStats } = playerInfo
     const highStats = Object.values(otherStats).filter((stat) => stat >= 60)
     return conocimiento >= 70 && highStats.length >= 2
+  }
+
+  const handleResetGame = () => {
+    navegador("/")
+    window.location.reload()
   }
 
   const miMazo = renderJsonData(playCards)
@@ -111,7 +132,7 @@ function App() {
             <Button
               className="mt-4 bg-gray-600 hover:bg-gray-800"
               size="amongus"
-              onClick={() => setPlayerInfo(infoInicial)}
+              onClick={() => handleResetGame()}
             >
               Volver a Jugar
             </Button>
@@ -147,7 +168,11 @@ function App() {
             <Button
               className="flex size-28 flex-col bg-blue-600 hover:bg-blue-700/95 2xl:size-40"
               onClick={() => handleMaze()}
-              disabled={actionPoints > 0 ? false : true}
+              disabled={
+                actionPoints > 0 && Object.values(playCards).length < 7
+                  ? false
+                  : true
+              }
             >
               <img src={Deck} alt="Mazo" />
               <span className="-mt-6 font-semibold">Coger Carta</span>
@@ -162,13 +187,20 @@ function App() {
             </TodasCartas>
           </div>
           <Button
-            className={`mb-4 bg-blue-700 hover:bg-blue-800/90 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
+            className={`bg-blue-700 hover:bg-blue-800/90 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
             size={`lg`}
             onClick={() => endTurn()}
           >
             Terminar Turno
           </Button>
-          <div className="z-1 flex flex-wrap justify-center gap-2">
+          <span className="h-6">
+            {Object.keys(playCards).length >= 7 && (
+              <span className="font-medium text-red-600 shadow-slate-100">
+                Número max de cartas alcanzado
+              </span>
+            )}
+          </span>
+          <div className="z-1 flex h-72 min-w-[30%] flex-wrap justify-center gap-2">
             {miMazo}
           </div>
         </section>

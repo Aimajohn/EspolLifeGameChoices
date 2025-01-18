@@ -50,7 +50,7 @@ export function ModalCard({
       setTableCards(selected)
       delete helperSet[selected.id]
       setPlayCards(helperSet)
-      console.log("hola", playCards)
+      setSelected(null)
     }
   }
   const handleCardBack = () => {

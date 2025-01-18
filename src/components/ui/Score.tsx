@@ -1,6 +1,7 @@
 import { mazo } from "@/types"
 import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
+import { calcScore, categorias } from "@/types"
 
 type Props = {
   tableCards: mazo
@@ -15,31 +16,8 @@ const base = {
 function Score({ tableCards }: Props) {
   //   const [values, setValues] = useState(base)
 
-  const categorias = ["conocimiento", "energia", "social", "money"] as const
   const [Score, setScore] = useState(base)
 
-  const calcScore = (tablero: mazo) => {
-    let values = {
-      conocimiento: 0,
-      energia: 0,
-      social: 0,
-      money: 0,
-    }
-    if (Object.values(tablero).length == 0) return values
-
-    Object.values(tablero).forEach((carta) => {
-      categorias.forEach(
-        (categoria) =>
-          (values = {
-            ...values,
-            [categoria]: (values[categoria] += carta[categoria]),
-          }),
-      )
-    })
-    console.log("3,", values)
-
-    return values
-  }
   useEffect(() => {
     setScore(calcScore(tableCards))
   }, [tableCards])

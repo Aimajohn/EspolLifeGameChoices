@@ -14,6 +14,46 @@ export type mazo = {
   [id: string]: CartaT
 }
 
+export const categorias = [
+  "conocimiento",
+  "energia",
+  "social",
+  "money",
+] as const
+
+export const deepCopy = async (cartas: mazo) => {
+  try {
+    const copia = await JSON.parse(JSON.stringify(cartas))
+    return copia as mazo
+  } catch {
+    console.warn(" no salio bien")
+  }
+  return cartas
+}
+
+export const calcScore = (tablero: mazo) => {
+  let values = {
+    conocimiento: 0,
+    energia: 0,
+    social: 0,
+    money: 0,
+  }
+  if (Object.values(tablero).length == 0) return values
+
+  Object.values(tablero).forEach((carta) => {
+    categorias.forEach(
+      (categoria) =>
+        (values = {
+          ...values,
+          [categoria]: (values[categoria] += carta[categoria]),
+        }),
+    )
+  })
+  console.log("3,", values)
+
+  return values
+}
+
 export const initialHand = {
   "001": {
     id: "001",
