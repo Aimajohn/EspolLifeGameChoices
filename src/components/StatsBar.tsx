@@ -46,7 +46,7 @@ type Props = {
   playerInfo: PlayerInfoT
 }
 
-export function StatsBar({ playerInfo }: Props) {
+function StatsBar({ playerInfo }: Props) {
   const chartData = [
     {
       browser: "Energia",
@@ -123,3 +123,5 @@ export function StatsBar({ playerInfo }: Props) {
     </Card>
   )
 }
+
+export default StatsBar

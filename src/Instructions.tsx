@@ -1,5 +1,4 @@
 import { Steps } from "@/components/Steps"
-import { StatsBar } from "./components/StatsBar"
 import { playerInfo } from "./types"
 import AmigoFiestero from "@/assets/InstruccionCard.png"
 import Atributos from "@/assets/atributos.png"
@@ -12,6 +11,8 @@ import {
 } from "@/components/ui/carousel"
 import { Button } from "./components/ui/button"
 import { Link } from "react-router-dom"
+import { lazy } from "react"
+const StatsBar = lazy(() => import("./components/StatsBar"))
 
 type Props = {}
 
@@ -76,7 +77,7 @@ function Instructions({}: Props) {
 
   return (
     <main className="flex h-svh items-center bg-indigo-950/30 transition">
-      <div className="mx-auto -mt-20 w-[50%]">
+      <div className="mx-auto w-[50%] 2xl:-mt-20">
         <Carousel className="w-full">
           <CarouselContent>{bloques}</CarouselContent>
           <CarouselPrevious />

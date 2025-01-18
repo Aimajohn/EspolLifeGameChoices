@@ -11,7 +11,7 @@ type Props = {
 
 function Card({ info }: Props) {
   return (
-    <span className="w-full cursor-pointer">
+    <span className="max-h-[274px] w-full cursor-pointer">
       <img title={info.id} className="w-full" src={info.src} />
     </span>
   )

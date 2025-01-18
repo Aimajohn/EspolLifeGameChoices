@@ -22,7 +22,7 @@
   "007": {
     "id": "007",
     "CardName": "Consejo Estudiantil",
-    "src": "",
+    "src": "/EspolLifeGameChoices/assets/Cartas/ConsejoEstudiantil.png",
     "description": "Perfecto para apoyo emocional y vínculos sociales.",
     "energia": 2,
     "money": 0,
@@ -32,7 +32,7 @@
   "008": {
     "id": "008",
     "CardName": "Hacer Deporte",
-    "src": "",
+    "src": "/EspolLifeGameChoices/assets/Cartas/HacerDeporte.png",
     "description": "Renueva tu energía y fortalece tus contactos.",
     "energia": -1,
     "money": 0,

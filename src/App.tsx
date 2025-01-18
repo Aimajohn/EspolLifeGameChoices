@@ -1,18 +1,20 @@
-import { useState } from "react"
-import "./App.css"
-import { Button } from "@/components/ui/button"
+import { infoInicial, mazo, CartaT, initialHand } from "@/types"
+import { Link } from "react-router-dom"
+import { lazy, useState } from "react"
 import MazoCartas from "@/assets/cartas.json"
-import { StatsBar } from "@/components/StatsBar"
 import Victoria from "@/assets/Victoria.png"
 import Derrota from "@/assets/derrota.png"
-import { Link } from "react-router-dom"
 import Deck from "@/assets/deck.png"
-import TimeChart from "@/components/TimeChart"
-import { infoInicial, mazo, CartaT, initialHand } from "@/types"
+import { Button } from "@/components/ui/button"
 import { HelpButton } from "./components/ui/HelpButton"
-import { ModalCard } from "./components/ModalCard"
-import Table from "./components/Table"
 import Score from "./components/ui/Score"
+import Table from "./components/Table"
+import TimeChart from "@/components/TimeChart"
+import { ModalCard } from "./components/ModalCard"
+import { FaQuestion } from "react-icons/fa"
+import { TodasCartas } from "./TodasCartas"
+import "./App.css"
+const StatsBar = lazy(() => import("./components/StatsBar.tsx"))
 
 function App() {
   const [currentTurn, setCurrentTurn] = useState(5)
@@ -91,12 +93,12 @@ function App() {
       {isGameOver && (
         <article
           id="GameOverModal"
-          className="absolute top-20 z-50 ml-[30%] flex w-[40%] flex-col items-center rounded-md bg-slate-900 p-12 text-slate-200"
+          className="absolute top-20 z-50 ml-[30%] flex w-2/5 flex-col items-center rounded-md bg-slate-900 p-12 text-slate-200"
         >
           <h2 className="text-center text-3xl font-semibold">
             {checkVictory() ? "¡Victoria!" : "Derrota"}
           </h2>
-          <div className="mx-auto my-4 w-96">
+          <div className="mx-auto my-4 w-52 2xl:w-96">
             <img
               src={isGameOver && checkVictory() ? Victoria : Derrota}
               alt="GameOver"
@@ -127,11 +129,11 @@ function App() {
           <TimeChart currentTurn={currentTurn} actionPoints={actionPoints} />
         </section>
 
-        <article className="absolute top-1/4 flex w-full flex-col items-center gap-4">
-          <div className="h-10 w-1/3">
+        <article className="absolute top-28 flex w-full transform flex-col items-center gap-4 2xl:top-1/4">
+          <div className="-mb-2 h-10 w-1/3 min-w-[30rem]">
             <Score tableCards={tableCards} />
           </div>
-          <div className="flex h-60 max-h-60 w-1/3 items-center bg-slate-700/80">
+          <div className="flex h-52 w-1/3 min-w-[30rem] items-center bg-slate-700/80 2xl:h-60 2xl:max-h-60">
             {Object.keys(tableCards).length != 0 ? (
               <Table tableCards={tableCards} />
             ) : null}
@@ -141,14 +143,24 @@ function App() {
           id="Cards&Deck"
           className={`absolute bottom-4 flex w-full flex-col items-center`}
         >
-          <Button
-            className="absolute -top-[30%] right-12 z-50 m-4 flex size-28 flex-col bg-blue-600 hover:bg-blue-700/95 2xl:size-40"
-            onClick={() => handleMaze()}
-            disabled={actionPoints > 0 ? false : true}
-          >
-            <img src={Deck} alt="Mazo" />
-            <span className="-mt-6 font-semibold">Coger Carta</span>
-          </Button>
+          <div className="absolute -top-[30%] right-12 z-50 m-4">
+            <Button
+              className="flex size-28 flex-col bg-blue-600 hover:bg-blue-700/95 2xl:size-40"
+              onClick={() => handleMaze()}
+              disabled={actionPoints > 0 ? false : true}
+            >
+              <img src={Deck} alt="Mazo" />
+              <span className="-mt-6 font-semibold">Coger Carta</span>
+            </Button>
+            <TodasCartas>
+              <Button
+                size={"icon"}
+                className="absolute -right-6 -top-6 bg-blue-950 hover:bg-blue-950/60"
+              >
+                <FaQuestion />
+              </Button>
+            </TodasCartas>
+          </div>
           <Button
             className={`mb-4 bg-blue-700 hover:bg-blue-800/90 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
             size={`lg`}

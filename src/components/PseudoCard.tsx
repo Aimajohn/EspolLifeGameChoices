@@ -13,15 +13,15 @@ function PseudoCard({ info, seleccionado }: Props) {
 
   return (
     <div
-      className="mx-1 flex h-full w-full flex-col flex-wrap items-center rounded-lg border-4 border-blue-700 bg-blue-200 p-2 text-slate-900"
+      className="mx-1 flex h-full max-h-[274px] w-full flex-col flex-wrap items-center rounded-lg border-4 border-blue-700 bg-blue-200 p-2 text-slate-900"
       onClick={() =>
         seleccionado ? seleccionado(info) : console.log("cagaste mano")
       }
     >
       <p className="text-xl">{info.CardName}</p>
       <div className="mx-auto my-3 size-16 bg-blue-700"></div>
-      <div className="max-w-[8rem] overflow-clip">
-        <p className="h-30 block text-ellipsis">{info.description}</p>
+      <div className="line-clamp-2 max-w-[8rem] overflow-clip">
+        <p className="h-30 block">{info.description}</p>
       </div>
       <div className="mt-3 flex flex-wrap gap-2">
         {[
