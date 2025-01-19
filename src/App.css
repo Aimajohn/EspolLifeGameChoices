@@ -145,4 +145,12 @@
 
     --label: 240 6% 90%;
   }
+  text.recharts-text.fill-\[--color-label\] {
+    font-size: 0.65rem !important;
+  }
+  @media (min-width: 1536px) {
+    text.recharts-text.fill-\[--color-label\] {
+      font-size: 0.9rem !important; /* Esto es equivalente a text-lg */
+    }
+  }
 }

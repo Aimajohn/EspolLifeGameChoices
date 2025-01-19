@@ -29,7 +29,7 @@ function Instructions({}: Props) {
               examen final!!!
             </p>
             <div className="flex">
-              <div className="inline-block w-1/2">
+              <div className="inline-block w-1/2 p-4">
                 <StatsBar playerInfo={playerInfo} />
               </div>
               <div className="text-md mt-4 w-1/2 2xl:text-[1.3rem]">

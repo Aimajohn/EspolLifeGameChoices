@@ -8,10 +8,10 @@ function Table({}: Props) {
   const tableCards = useCardStore((state) => state.tableCards)
 
   return (
-    <div className="flex w-full justify-center gap-4 rounded-lg p-6">
+    <div className="-mt-4 flex w-full justify-center gap-4 rounded-lg 2xl:mt-0 2xl:p-6">
       {Object.values(tableCards).map((carta) =>
         carta.src != "" ? (
-          <div key={carta.id} className="w-32 2xl:w-36">
+          <div key={carta.id} className="w-[20%]">
             <Card info={carta} id={carta.id} />
           </div>
         ) : (

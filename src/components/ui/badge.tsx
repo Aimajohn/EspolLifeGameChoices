@@ -41,7 +41,7 @@ export interface BadgeProps
 function Badge({ className, children, variant, puntos, ...props }: BadgeProps) {
   return (
     <div className={cn(badgeVariants({ variant }), className)} {...props}>
-      <span className="-ml-2 mr-2 block size-6 rounded-full bg-slate-800/20 text-center text-xs leading-6">
+      <span className="-ml-[.65rem] mr-2 block size-[1.1rem] rounded-full bg-slate-800/20 text-center text-[.5rem] text-xs leading-[1.1rem] 2xl:-ml-2 2xl:size-6 2xl:leading-6">
         {puntos}
       </span>
       {children}

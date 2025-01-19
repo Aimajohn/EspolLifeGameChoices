@@ -39,53 +39,59 @@ function App() {
 
   const renderJsonData = (cardData: mazo) => {
     return Object.entries(cardData).map(([key, value]) => (
-      <div className="-mx-1 w-36 2xl:w-52" key={key}>
-        <ModalCard info={value} setSelected={setSelected} selected={selected} />
+      <div className="-mx-1 aspect-[3/4] w-[11%]" key={key}>
+        <div className="object-cover">
+          <ModalCard
+            info={value}
+            setSelected={setSelected}
+            selected={selected}
+          />
+        </div>
       </div>
     ))
   }
   const miMazo = renderJsonData(playCards)
 
   return (
-    <>
+    <main className="relative w-full">
       {isGameOver && (
-        <article
-          id="GameOverModal"
-          className="absolute top-20 z-50 ml-[30%] w-2/5"
-        >
-          <GameOver />
+        <article id="GameOverModal" className="flex w-full justify-center">
+          <div className="absolute top-12 z-10 w-1/2">
+            <GameOver />
+          </div>
         </article>
       )}
-      <main
-        className={`relative min-h-svh w-full bg-indigo-950/30 text-slate-200 ${isGameOver ? "blur-sm" : ""}`}
+      <div
+        className={`relative grid h-svh grid-cols-5 grid-rows-5 overflow-hidden bg-indigo-950/30 p-6 text-slate-200 ${isGameOver ? "blur-sm brightness-50" : ""}`}
       >
-        <section id="TopSection" className="relative">
-          <div className="absolute top-6 z-50 w-72 2xl:w-80">
-            <StatsBar playerInfo={playerInfo} />
-            <HelpButton />
-          </div>
+        <div className="relative col-start-1 row-span-2 w-4/5 2xl:w-80">
+          <StatsBar playerInfo={playerInfo} />
+          <HelpButton />
+        </div>
+        <div className="col-start-3">
           <TimeChart />
-        </section>
+        </div>
 
         <article
           id="TableSection"
-          className="absolute top-28 flex w-full transform flex-col items-center gap-4 2xl:top-1/4"
+          className="col-span-3 col-start-2 row-start-2 row-end-4 mx-auto mt-6 flex max-h-[300px] w-2/3 min-w-[30rem] flex-col items-center gap-4 bg-slate-700/80"
         >
-          <div className="-mb-2 h-10 w-1/3 min-w-[30rem]">
+          <div className="-mb-2 min-h-10 w-full px-6 py-1">
             <Score />
           </div>
-          <div className="flex h-52 w-1/3 min-w-[30rem] items-center bg-slate-700/80 2xl:h-60 2xl:max-h-60">
+          <div className="flex h-4/5 items-center 2xl:max-h-60">
             {Object.keys(tableCards).length != 0 ? <Table /> : null}
           </div>
         </article>
 
+        <div className="col-span-1 col-start-5 row-start-4 -mt-12 mr-12 flex justify-end">
+          <DeckButton />
+        </div>
+
         <section
           id="Cards&Deck"
-          className="absolute bottom-4 flex w-full flex-col items-center"
+          className="relative col-span-5 col-start-1 row-start-4 row-end-6 -mb-4 mt-4 flex w-full flex-col items-center justify-end gap-2"
         >
-          <div className="absolute -top-[30%] right-12 z-50 m-4">
-            <DeckButton />
-          </div>
           <Button
             className={`bg-blue-700 hover:bg-blue-800/90 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
             size={`lg`}
@@ -94,19 +100,15 @@ function App() {
           >
             Terminar Turno
           </Button>
-          <span className="h-6">
-            {Object.keys(playCards).length >= 7 && (
-              <span className="font-medium text-red-600 shadow-slate-100">
-                Número max de cartas alcanzado
-              </span>
-            )}
-          </span>
-          <div className="z-1 flex h-48 min-w-[30%] flex-wrap justify-center gap-2 2xl:h-72">
+
+          <div className="flex min-w-[30%] flex-wrap justify-center gap-2">
             {miMazo}
           </div>
         </section>
-      </main>
-    </>
+        {/* <section id="TopSection" className="relative"></section>
+      <div className={`relative ${isGameOver ? "blur-sm" : ""}`}></div> */}
+      </div>
+    </main>
   )
 }
 

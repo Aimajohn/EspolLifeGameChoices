@@ -20,7 +20,10 @@ export function TodasCartas({ children }: Props) {
   const awa: JSX.Element[] = []
   Object.values({ ...initialHand, ...Cartas }).map((info) =>
     awa.push(
-      <div className="w-32 2xl:h-72 2xl:w-48" key={info.id}>
+      <div
+        className="w-32 overflow-hidden rounded-lg 2xl:h-72 2xl:w-48"
+        key={info.id}
+      >
         {info.src != "" ? (
           <Card info={info} id={info.id} />
         ) : (

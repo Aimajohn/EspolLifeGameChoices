@@ -26,7 +26,12 @@ function Score({}: Props) {
       {[
         categorias.map((a) =>
           Score[a] != 0 ? (
-            <Badge key={a} puntos={Score[a]} variant={a}>
+            <Badge
+              className="py-0 text-[.5rem] 2xl:py-1 2xl:text-sm"
+              key={a}
+              puntos={Score[a]}
+              variant={a}
+            >
               {a == "money" ? "Dinero" : a}
             </Badge>
           ) : null,

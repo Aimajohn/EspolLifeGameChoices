@@ -66,8 +66,8 @@ function StatsBar({ playerInfo }: Props) {
     { browser: "Dinero", points: playerInfo.money, fill: "var(--color-money)" },
   ]
   return (
-    <Card className="mx-6 rounded-sm border-0 pt-4 shadow-none">
-      <CardHeader className="-my-4 text-center leading-none text-slate-300 2xl:text-xl">
+    <Card className="rounded-sm border-0 pt-4 shadow-none">
+      <CardHeader className="-my-4 text-center text-sm leading-none text-slate-300 2xl:text-xl">
         <CardTitle>Atributos</CardTitle>
       </CardHeader>
       <CardContent>
@@ -94,12 +94,7 @@ function StatsBar({ playerInfo }: Props) {
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
             />
-            <Bar
-              dataKey="points"
-              className="2xl:text-md !text-[.75rem]"
-              layout="vertical"
-              radius={5}
-            >
+            <Bar dataKey="points" layout="vertical" radius={5}>
               <LabelList
                 dataKey="browser"
                 position="insideLeft"

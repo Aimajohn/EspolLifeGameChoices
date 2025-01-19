@@ -9,8 +9,8 @@ type Props = {
 
 function Card({ info }: Props) {
   return (
-    <span className="max-h-[274px] w-full cursor-pointer">
-      <img title={info.id} className="w-full" src={info.src} />
+    <span className="cursor-pointer">
+      <img title={info.id} className="object-cover" src={info.src} />
     </span>
   )
 }
