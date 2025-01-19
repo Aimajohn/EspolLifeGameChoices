@@ -35,10 +35,8 @@ function Instructions({}: Props) {
               <div className="text-md mt-4 w-1/2 2xl:text-[1.3rem]">
                 Para superarlo debes subir tus atributos de{" "}
                 <b>conocimiento a 70 puntos</b>. <br />
-                Pero no solo eso, estudiar hasta el cansancio te impedirá
-                realizar el examen correctamente <br />
-                Debes llegar al día del examen con al menos{" "}
-                <b>60 puntos de energía</b>.
+                Además de al menos <b> 60 puntos </b> en otros dos atributos y
+                así realizar el examen de forma exitosa. <br />
               </div>
             </div>
           </div>
@@ -51,10 +49,10 @@ function Instructions({}: Props) {
           <div className="text-md flex justify-between 2xl:text-[1.4rem]">
             <div className="w-3/5">
               <p>
-                Aumentas tus atributos jugando tus cartas, hay dos tipos eventos
-                y persojes, cada carta interactua de forma positiva o negativa
-                con tus atributos, debes elegir cuidadosamente para llegar a tu
-                meta!
+                Aumentas tus atributos jugando tus cartas, hay dos tipos:
+                eventos y personajes, cada carta interactua de forma positiva o
+                negativa con tus atributos, debes elegir cuidadosamente para
+                llegar a tu meta!
               </p>
               <div className="mt-4 w-[70%]">
                 <img src={Atributos} alt="" />
