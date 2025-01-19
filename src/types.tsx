@@ -4,6 +4,33 @@ export const playerInfo = {
   conocimiento: 70,
   social: 40,
 }
+
+export type PlayerInfoT = {
+  energia: number
+  money: number
+  conocimiento: number
+  social: number
+}
+
+export const categories = [
+  "conocimiento",
+  "energia",
+  "social",
+  "money",
+] as const
+
+export interface CartaRetoT {
+  id: string
+  name: string
+  difficulty: number
+  description: string
+  src: string
+  requiredCard: PlayerInfoT
+  requiredStat: {}
+  fail: PlayerInfoT
+  succeed: PlayerInfoT
+}
+
 export const infoInicial = {
   energia: 50,
   money: 60,
@@ -99,13 +126,6 @@ export const initialHand = {
 }
 
 export type EventType = "academic" | "social" | "health" | "economic"
-
-export type PlayerInfoT = {
-  energia: number
-  money: number
-  conocimiento: number
-  social: number
-}
 
 export type CartaT = {
   id: string

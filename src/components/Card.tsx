@@ -1,10 +1,10 @@
 // import cardData from "../assets/cartas.json"
 
-import { CartaT } from "../types"
+import { CartaRetoT, CartaT } from "../types"
 
 type Props = {
   id: string
-  info: CartaT
+  info: CartaT | CartaRetoT
 }
 
 function Card({ info }: Props) {

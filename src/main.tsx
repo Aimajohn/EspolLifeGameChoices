@@ -18,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/" index element={<StartPage />} />
             <Route path="/Instructions" index element={<Instructions />} />
             <Route path="/Game" index element={<App />} />
+            {/* <Route path="/Dice" index element={<Dice />} /> */}
           </Routes>
         </div>
         <div className="absolute bottom-0 z-0">

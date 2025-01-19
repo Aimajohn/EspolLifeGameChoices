@@ -11,9 +11,9 @@ function DeckButton({}: Props) {
   const handleMaze = useCardStore((state) => state.handleMaze)
   const playCards = useCardStore((state) => state.playCards)
   return (
-    <div className="relative w-min">
+    <div className="relative z-20 w-min">
       <Button
-        className="flex size-24 flex-col bg-blue-600 hover:bg-blue-700/95 2xl:size-32"
+        className="flex size-24 flex-col rounded-sm bg-blue-600 hover:bg-blue-700/95 2xl:size-32"
         onClick={() => handleMaze()}
         disabled={
           actionPoints <= 0 || Object.values(playCards).length >= 7
@@ -34,7 +34,7 @@ function DeckButton({}: Props) {
       <TodasCartas>
         <Button
           size={"bigIcon"}
-          className="absolute -right-4 -top-4 bg-blue-950 hover:bg-blue-950/60 2xl:-right-6 2xl:-top-6"
+          className="absolute -right-4 -top-4 rounded-sm bg-blue-950 hover:bg-blue-950/60 2xl:-right-6 2xl:-top-6"
         >
           <FaQuestion />
         </Button>

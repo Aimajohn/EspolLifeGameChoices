@@ -30,7 +30,6 @@ export function ModalCard({ info, setSelected, selected }: Props) {
   const actionPoints = useStatStore((state) => state.actionPoints)
   const setTableCards = useCardStore((state) => state.handleTableCards)
   const handleCardAction = () => {
-    console.log("not understnding")
     if (actionPoints > 0) {
       if (!selected) return null
       setActionPoints(-1)

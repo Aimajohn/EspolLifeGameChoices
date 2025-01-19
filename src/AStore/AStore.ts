@@ -22,16 +22,29 @@ interface CardStore {
   setPlayCards: (misCartas: mazo) => void
 }
 
+interface dices {
+  x: number
+  y: number
+  z: number
+  w: number
+}
+
 interface StatStore {
   actionPoints: number
   setActionPoints: (numero: number) => void
   currentTurn: number
+  isTaskDone: boolean
+  Intentos: number[]
   endTurn: () => void
   setInitialStats: () => void
   playerInfo: PlayerInfoT
   isGameOver: boolean
   cleanStatStore: () => void
   setIsGameOver: () => void
+  playTask: (selected: PlayerInfoT) => void
+  rotation: dices
+  rollDice: () => number[]
+  reiniciarDice: () => void
 }
 
 const StatStoreInitiall = {
@@ -92,10 +105,57 @@ export const useCardStore = create<CardStore>((set, get) => ({
 }))
 
 export const useStatStore = create<StatStore>((set, get) => ({
+  rotation: { x: 720, y: 810, w: 720, z: 810 },
   actionPoints: 3,
   playerInfo: {} as PlayerInfoT,
   currentTurn: 5,
   isGameOver: false,
+  isTaskDone: false,
+  Intentos: [] as number[],
+  rollDice: () => {
+    const rnd = Math.floor(Math.random() * 6) + 1
+    const rnd2 = Math.floor(Math.random() * 6) + 1
+    console.log(rnd, rnd2)
+    let x1, y2, w2, z2
+    switch (rnd) {
+      case 1:
+        x1 = 360
+        y2 = 90
+        break
+      case 6:
+        x1 = 0
+        y2 = 270
+        break
+      default:
+        x1 = 90 * rnd > 360 ? 90 * rnd - 360 : 90 * rnd
+        y2 = 1800
+        break
+    }
+    switch (rnd2) {
+      case 1:
+        w2 = 0
+        z2 = 90
+        break
+      case 6:
+        w2 = 0
+        z2 = 270
+        break
+      default:
+        w2 = 90 * rnd2 > 360 ? 90 * rnd2 - 360 : 90 * rnd2
+        z2 = 1800
+        break
+    }
+    set(() => ({
+      rotation: { x: x1, y: y2, w: w2, z: z2 },
+    }))
+    set((state) => ({ Intentos: [...state.Intentos, rnd + rnd2] }))
+
+    return [rnd, rnd2]
+  },
+  reiniciarDice: () => {
+    const initialRotation1 = { x: 720, y: 810, w: 720, z: 810 }
+    set(() => ({ rotation: initialRotation1 }))
+  },
   setActionPoints: (numero: number) =>
     set({ actionPoints: get().actionPoints + numero }),
   setInitialStats: async () => {
@@ -137,5 +197,15 @@ export const useStatStore = create<StatStore>((set, get) => ({
       const { setIsGameOver } = get()
       setIsGameOver()
     }
+  },
+  playTask: (selected: PlayerInfoT) => {
+    set((state) => ({
+      playerInfo: {
+        conocimiento: state.playerInfo.conocimiento + selected.conocimiento,
+        energia: state.playerInfo.energia + selected.energia,
+        social: state.playerInfo.social + selected.social,
+        money: state.playerInfo.money + selected.money,
+      },
+    }))
   },
 }))
