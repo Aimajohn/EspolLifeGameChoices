@@ -4,7 +4,6 @@ import { useStatStore } from "@/AStore/AStore"
 import Victoria from "@/assets/VictoriaTask.png"
 import Fracaso from "@/assets/FracasoTask.png"
 import { categories, CartaRetoT } from "@/types"
-import { VscDebugRestart } from "react-icons/vsc"
 
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Badge } from "./ui/badge"
@@ -18,7 +17,6 @@ const DiceComponent = ({ selected }: Props) => {
   const rollDice = useStatStore((state) => state.rollDice)
   const rotation = useStatStore((state) => state.rotation)
   const Intentos = useStatStore((state) => state.Intentos)
-  const reiniciarDice = useStatStore((state) => state.reiniciarDice)
   const playTask = useStatStore((state) => state.playTask)
   const [isOver, setIsOver] = useState(false)
 
@@ -32,22 +30,8 @@ const DiceComponent = ({ selected }: Props) => {
     playTask(plusPoints)
   }
 
-  const [isUsed, setIsUsed] = useState(false)
-
-  const reiniciar = () => {
-    reiniciarDice()
-    setTimeout(() => {
-      setIsUsed(false)
-    }, 800)
-    // const rnd = 4 as side
-    // const rnd2 = 3 as side
-  }
   const playDice = () => {
     rollDice()
-
-    setTimeout(() => {
-      setIsUsed(true)
-    }, 800)
     // const rnd = 6 as side
     // const rnd2 = 1 as side
   }
@@ -183,7 +167,8 @@ const DiceComponent = ({ selected }: Props) => {
       </div>
       <div className="mt-10 flex flex-col items-center space-y-4">
         {Intentos.length < 3 && (
-          <Button disabled={isUsed ? true : false} onClick={playDice}>
+          // <Button disabled={isUsed ? true : false} onClick={playDice}>
+          <Button disabled={false} onClick={playDice}>
             Lanzar dados!
           </Button>
         )}
@@ -197,15 +182,6 @@ const DiceComponent = ({ selected }: Props) => {
               Aceptar
             </Button>
           </div>
-        )}
-        {isUsed && Intentos.length < 3 && (
-          <Button
-            className="absolute top-[40%] flex items-center bg-slate-400 hover:bg-slate-600"
-            onClick={reiniciar}
-          >
-            <VscDebugRestart size={20} />
-            <span>Reiniciar</span>
-          </Button>
         )}
       </div>
       <div

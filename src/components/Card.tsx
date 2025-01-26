@@ -1,17 +1,22 @@
 // import cardData from "../assets/cartas.json"
 
-import { CartaRetoT, CartaT } from "../types"
+import { PlayerInfoT } from "../types"
+import CardAttributes from "./CardAttributes"
 
 type Props = {
   id: string
-  info: CartaT | CartaRetoT
+  src: string
+  maInfo: PlayerInfoT
 }
 
-function Card({ info }: Props) {
+function Card({ id, src, maInfo }: Props) {
   return (
-    <span className="cursor-pointer">
-      <img title={info.id} className="object-cover" src={info.src} />
-    </span>
+    <div className="relative w-full cursor-pointer">
+      <img title={id} className="rounded-xl object-cover" src={src} />
+      <div className="absolute bottom-[12%] h-1/5 w-full px-[10%]">
+        <CardAttributes info={maInfo} />
+      </div>
+    </div>
   )
 }
 

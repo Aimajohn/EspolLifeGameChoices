@@ -4,6 +4,11 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        Montserrat: "Montserrat, serif",
+        Lilita: "Lilita One, serif",
+        Bungee: "Bungee, serif",
+      },
       backgroundPosition: {
         "center-padding": "calc(50% + 50px) scale-50 calc(50% + 50px) ",
       },

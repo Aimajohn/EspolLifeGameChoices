@@ -14,14 +14,14 @@
     "CardName": "Amigo Estudioso",
     "src": "/EspolLifeGameChoices/assets/Cartas/AmigoEstudioso.png",
     "description": "Ideal para una tarde de estudio, pero es muy exigente.",
-    "energia": -1,
     "money": 0,
     "conocimiento": 2,
-    "social": 5
+    "social": 5,
+    "energia": 0
   },
   "007": {
     "id": "007",
-    "CardName": "Consejo Estudiantil",
+    "CardName": "Consejero",
     "src": "/EspolLifeGameChoices/assets/Cartas/ConsejoEstudiantil.png",
     "description": "Perfecto para apoyo emocional y vínculos sociales.",
     "energia": 2,
@@ -44,10 +44,10 @@
     "CardName": "Clase Extra +",
     "src": "/EspolLifeGameChoices/assets/Cartas/ClaseExtra.png",
     "description": "Ideal para reforzar conocimientos faltantes.",
-    "energia": -1,
     "money": 0,
     "conocimiento": 2,
-    "social": 0
+    "social": 0,
+    "energia": -1
   },
   "010": {
     "id": "010",
@@ -94,9 +94,9 @@
     "CardName": "Espresso Doble",
     "src": "/EspolLifeGameChoices/assets/Cartas/EspressoDoble.png",
     "description": "Hecho en casa. Te mantendrá despierto toda la noche.",
-    "energia": 7,
     "money": -4,
     "conocimiento": 0,
-    "social": 0
+    "social": 0,
+    "energia": 7
   }
 }

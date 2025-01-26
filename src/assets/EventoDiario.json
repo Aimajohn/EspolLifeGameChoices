@@ -1,0 +1,59 @@
+{
+  "E001": {
+    "id": "E001",
+    "title": "Problema Familiar",
+    "description": "Hay un problema en casa que te tiene mal. Necesitas hablar con el consejero estudiantil para evitar una baja en salud mental.",
+    "condition": "007",
+    "src": "/EspolLifeGameChoices/assets/Cartas/NewEvent.png",
+    "fail": {
+      "conocimiento": 0,
+      "social": 0,
+      "money": 0,
+      "energia": -5
+    },
+    "succeed": {
+      "conocimiento": 0,
+      "social": 5,
+      "money": 0,
+      "energia": 5
+    }
+  },
+  "E002": {
+    "id": "E002",
+    "title": "Conflicto de Equipo",
+    "description": "El trabajo grupal parecía una buena idea... hasta que surgieron los problemas. Uno de tus compañeros no está cumpliendo con su parte y el ambiente se dañó. Debes decidir confrontar la situación o asumir más trabajo por el bien del equipo.",
+    "condition": "choice",
+    "src": "/EspolLifeGameChoices/assets/Cartas/NewEvent.png",
+    "fail": {
+      "conocimiento": 0,
+      "social": -5,
+      "money": 0,
+      "energia": -10
+    },
+    "succeed": {
+      "conocimiento": 0,
+      "social": 10,
+      "money": 0,
+      "energia": -1
+    }
+  },
+  "E003": {
+    "id": "E003",
+    "title": "Día de Lección Sorpresa",
+    "description": "La tranquilidad de tu día desaparece cuando el profesor anuncia una lección sorpresa. Sin tiempo para prepararte solo dependes de lo que tienes a la mano. El profesor es conocido por usar examenes previos como base para las lecciones, con los exámenes será pan comido.",
+    "condition": "013",
+    "src": "/EspolLifeGameChoices/assets/Cartas/NewEvent.png",
+    "fail": {
+      "conocimiento": -5,
+      "social": -0,
+      "money": 0,
+      "energia": -5
+    },
+    "succeed": {
+      "conocimiento": 10,
+      "social": 0,
+      "money": 0,
+      "energia": 0
+    }
+  }
+}

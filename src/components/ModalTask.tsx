@@ -55,7 +55,7 @@ export function ModalTask({ info, setSelected, selected }: Props) {
           variant="fit"
           disabled={Intentos.length >= 3 ? true : false}
         >
-          {<Card info={info} id={info.id} />}
+          {<Card maInfo={info.succeed} src={info.src} id={info.id} />}
         </Button>
       </DialogTrigger>
       <DialogContent className="w-full border-slate-900/95 bg-slate-900/95 text-slate-100 shadow-md 2xl:max-w-[35%]">

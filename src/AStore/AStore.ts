@@ -60,6 +60,18 @@ const CardStoreInitial = {
   tableCards: {},
   playCards: {},
 }
+
+type StatAnimation = {
+  turnos: boolean
+  acciones: boolean
+  descartes: boolean
+  inEvent: boolean
+  setInEvent: () => void
+  setTurnos: () => void
+  setAcciones: () => void
+  setDescartes: () => void
+}
+
 export const useCardStore = create<CardStore>((set, get) => ({
   playDeck: [],
   tableCards: {},
@@ -105,19 +117,15 @@ export const useCardStore = create<CardStore>((set, get) => ({
   },
 }))
 
-type StatAnimation = {
-  turnos: boolean
-  acciones: boolean
-  descartes: boolean
-  setTurnos: () => void
-  setAcciones: () => void
-  setDescartes: () => void
-}
-
 export const useStatAnimation = create<StatAnimation>((set) => ({
   turnos: false,
   acciones: false,
   descartes: false,
+  inEvent: false,
+
+  setInEvent: () => {
+    set((state) => ({ inEvent: !state.inEvent }))
+  },
   setTurnos: () => {
     set(() => ({ turnos: true }))
     setTimeout(() => {
@@ -147,6 +155,8 @@ export const useStatStore = create<StatStore>((set, get) => ({
   isTaskDone: false,
   Intentos: [] as number[],
   rollDice: () => {
+    const { reiniciarDice } = get()
+    reiniciarDice()
     const rnd = Math.floor(Math.random() * 6) + 1
     const rnd2 = Math.floor(Math.random() * 6) + 1
     let x1, y2, w2, z2
@@ -178,10 +188,14 @@ export const useStatStore = create<StatStore>((set, get) => ({
         z2 = 1800
         break
     }
-    set(() => ({
-      rotation: { x: x1, y: y2, w: w2, z: z2 },
-    }))
-    set((state) => ({ Intentos: [...state.Intentos, rnd + rnd2] }))
+    setTimeout(() => {
+      set(() => ({
+        rotation: { x: x1, y: y2, w: w2, z: z2 },
+      }))
+    }, 500)
+    setTimeout(() => {
+      set((state) => ({ Intentos: [...state.Intentos, rnd + rnd2] }))
+    }, 1500)
 
     return [rnd, rnd2]
   },
@@ -216,6 +230,7 @@ export const useStatStore = create<StatStore>((set, get) => ({
     setTurnos()
     const { currentTurn } = get()
     set((state) => ({ currentTurn: state.currentTurn - 1 }))
+
     set(() => ({ actionPoints: 3 }))
     const tableScore = calcScore(tableCards)
     if (Object.values(tableCards).length != 0) {

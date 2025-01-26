@@ -12,7 +12,16 @@ function Table({}: Props) {
       {Object.values(tableCards).map((carta) =>
         carta.src != "" ? (
           <div key={carta.id} className="w-[22%]">
-            <Card info={carta} id={carta.id} />
+            <Card
+              maInfo={{
+                conocimiento: carta.conocimiento,
+                social: carta.social,
+                money: carta.money,
+                energia: carta.energia,
+              }}
+              src={carta.src}
+              id={carta.id}
+            />
           </div>
         ) : (
           <div key={carta.id} className="h-52 w-40 overflow-hidden">

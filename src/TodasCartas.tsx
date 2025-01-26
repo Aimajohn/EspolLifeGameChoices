@@ -25,7 +25,16 @@ export function TodasCartas({ children }: Props) {
         key={info.id}
       >
         {info.src != "" ? (
-          <Card info={info} id={info.id} />
+          <Card
+            maInfo={{
+              conocimiento: info.conocimiento,
+              social: info.social,
+              money: info.money,
+              energia: info.energia,
+            }}
+            src={info.src}
+            id={info.id}
+          />
         ) : (
           <PseudoCard info={info} id={info.id} />
         )}

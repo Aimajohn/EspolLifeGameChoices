@@ -1,11 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { TodasCartas } from "@/TodasCartas"
-import { FaQuestion } from "react-icons/fa"
-import Deck from "/EspolLifeGameChoices/assets/Cartas/Deck.png"
-import deckIcon from "@/assets/deck.png"
+import Deck from "@/assets/Deck.png"
 import { useCardStore, useStatStore } from "@/AStore/AStore"
 import { PiCardsFill } from "react-icons/pi"
-import Card from "./Card"
 
 type Props = {}
 

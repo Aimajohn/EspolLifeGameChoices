@@ -9,17 +9,24 @@ import GameOver from "@/components/GameOver.tsx"
 import { ModalCard } from "./components/ModalCard"
 import "./App.css"
 const StatsBar = lazy(() => import("./components/StatsBar.tsx"))
-import { useCardStore, useStatStore } from "@/AStore/AStore.ts"
+import {
+  useCardStore,
+  useStatStore,
+  useStatAnimation,
+} from "@/AStore/AStore.ts"
 import DeckButton from "./components/DeckButton.tsx"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Terminal } from "lucide-react"
 import { MdFiberSmartRecord } from "react-icons/md"
 import Cartas from "@/assets/CartasReto.json"
 import { ModalTask } from "./components/ModalTask.tsx"
+import DailyEvent from "./components/DailyEvent.tsx"
 
 function App() {
   const [selected, setSelected] = useState<CartaT | null>(null)
   const [selectedR, setSelectedR] = useState<CartaRetoT | null>(null)
+  const inEvent = useStatAnimation((state) => state.inEvent)
+  const setInEvent = useStatAnimation((state) => state.setInEvent)
 
   //Estado de CardStore
   const playCards = useCardStore((state) => state.playCards)
@@ -29,6 +36,7 @@ function App() {
   //Estado de Stats
   const actionPoints = useStatStore((state) => state.actionPoints)
   const endTurn = useStatStore((state) => state.endTurn)
+  const currentTurn = useStatStore((state) => state.currentTurn)
   const playerInfo = useStatStore((state) => state.playerInfo)
   const isGameOver = useStatStore((state) => state.isGameOver)
   const setInitialStats = useStatStore((state) => state.setInitialStats)
@@ -42,6 +50,12 @@ function App() {
       console.error("upsie")
     }
   }, [])
+
+  useEffect(() => {
+    if (currentTurn > 0 && currentTurn % 2 == 0) {
+      setInEvent()
+    }
+  }, [currentTurn])
 
   const renderJsonData = (cardData: mazo) => {
     return Object.entries(cardData).map(([key, value]) => (
@@ -66,6 +80,11 @@ function App() {
             <GameOver />
           </div>
         </article>
+      )}
+      {inEvent && (
+        <div className="absolute top-0 z-50 h-full w-full bg-slate-950/80">
+          <DailyEvent />
+        </div>
       )}
       <div
         className={`relative grid h-svh grid-cols-5 grid-rows-5 overflow-hidden bg-indigo-950/30 p-6 text-slate-200 ${isGameOver ? "blur-sm brightness-50" : ""}`}

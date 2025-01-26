@@ -43,13 +43,19 @@ export function ModalCard({ info, setSelected, selected }: Props) {
   const handleCardBack = () => {
     setSelected(null)
   }
-  const categories = ["conocimiento", "energia", "social", "money"] as const
+  const categories = ["conocimiento", "social", "money", "energia"] as const
+  const maInfo = {
+    conocimiento: info.conocimiento,
+    social: info.social,
+    money: info.money,
+    energia: info.energia,
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button size={"fit"} onClick={() => setSelected(info)} variant="fit">
           {info.src != "" ? (
-            <Card info={info} id={info.id} />
+            <Card maInfo={maInfo} src={info.src} id={info.id} />
           ) : (
             <PseudoCard info={info} id={info.id} />
           )}
@@ -58,7 +64,8 @@ export function ModalCard({ info, setSelected, selected }: Props) {
       <DialogContent className="border-slate-900/95 bg-slate-900/95 text-slate-100 shadow-md sm:max-w-[35%]">
         <div className="flex">
           <div className="flex h-full w-[60%] items-center">
-            <img src={info.src} alt={info.CardName} />
+            <Card maInfo={maInfo} src={info.src} id={info.id} />
+            {/* <img src={info.src} alt={info.CardName}  /> */}
           </div>
           <div className="flex h-full flex-col justify-between p-4 pl-6">
             <div className="flex h-full flex-col justify-between">

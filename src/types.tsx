@@ -6,10 +6,10 @@ export const playerInfo = {
 }
 
 export type PlayerInfoT = {
-  energia: number
-  money: number
   conocimiento: number
+  money: number
   social: number
+  energia: number
 }
 
 export const categories = [
