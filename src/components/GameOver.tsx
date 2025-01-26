@@ -39,7 +39,14 @@ function GameOver({}: Props) {
         />
       </div>
       <p className="text-center text-lg">
-        Conocimiento Académico final: {playerInfo.conocimiento}%
+        Tu promedio final fue de:{" "}
+        {Math.round(
+          ((playerInfo.conocimiento * 6) / 7 +
+            playerInfo.energia +
+            playerInfo.social) /
+            3,
+        )}
+        %
       </p>
       <Link to={"/"}>
         <Button

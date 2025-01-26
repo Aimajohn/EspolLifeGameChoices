@@ -23,10 +23,10 @@ function Instructions({}: Props) {
         <Steps titulo="Instrucciones">
           <div className="leading-sm text-md 2xl:text-[1.4rem]">
             <p>
-              Para esta DEMO te encuentras en la{" "}
-              <b>fase final del semestre! </b> <br />
+              Para esta DEMO te encuentras en la <b>fase final del semestre </b>{" "}
+              <br />
               Tienes solo <b>una semana</b> para prepararte, se acerca el temido
-              examen final!!!
+              examen final
             </p>
             <div className="flex">
               <div className="inline-block w-1/2 p-4">
@@ -49,10 +49,10 @@ function Instructions({}: Props) {
           <div className="text-md flex justify-between 2xl:text-[1.4rem]">
             <div className="w-3/5">
               <p>
-                Aumentas tus atributos jugando tus cartas, hay dos tipos:
-                eventos y personajes, cada carta interactua de forma positiva o
-                negativa con tus atributos, debes elegir cuidadosamente para
-                llegar a tu meta!
+                Aumentas tus atributos jugando cartas, hay dos tipos: eventos y
+                personajes, cada carta interactúa de forma positiva o negativa
+                con tus atributos, debes elegir cuidadosamente para llegar a tu
+                meta.
               </p>
               <div className="mt-4 w-[70%]">
                 <img src={Atributos} alt="" />

@@ -19,7 +19,6 @@ const DiceComponent = ({ selected }: Props) => {
   const rotation = useStatStore((state) => state.rotation)
   const Intentos = useStatStore((state) => state.Intentos)
   const reiniciarDice = useStatStore((state) => state.reiniciarDice)
-  const setActionPoints = useStatStore((state) => state.setActionPoints)
   const playTask = useStatStore((state) => state.playTask)
   const [isOver, setIsOver] = useState(false)
 
@@ -189,9 +188,12 @@ const DiceComponent = ({ selected }: Props) => {
           </Button>
         )}
         {Intentos.length >= 3 && (
-          <div className="absolute top-[40%] -mt-4 flex flex-col gap-2 rounded-md bg-slate-900/60 p-6">
+          <div className="absolute top-[40%] -mt-4 flex flex-col gap-2 rounded-md bg-slate-900/90 p-6 text-slate-300">
             <span>Ya no tienes mas oportunidades</span>
-            <Button className="bg-red-950" onClick={() => setIsOver(true)}>
+            <Button
+              className="hover:red-900 bg-red-950 text-slate-300"
+              onClick={() => setIsOver(true)}
+            >
               Aceptar
             </Button>
           </div>
@@ -209,9 +211,11 @@ const DiceComponent = ({ selected }: Props) => {
       <div
         className={`${isOver ? "flex" : "hidden"} absolute top-0 h-full w-full items-center justify-center bg-gray-900/80`}
       >
-        <span className="flex w-4/5 flex-col rounded-sm bg-slate-950/90 px-6 py-4 text-center font-semibold text-slate-200">
-          <h2>{Math.max(...Intentos) >= 10 ? "Victoria" : "Fracaso"}</h2>
-          <span className="my-2 text-sm font-light">
+        <span className="flex w-4/5 flex-col rounded-sm bg-slate-900 px-6 py-4 text-center font-semibold text-slate-300">
+          <h2 className="text-xl font-semibold">
+            {Math.max(...Intentos) >= 10 ? "Victoria" : "Fracaso"}
+          </h2>
+          <span className="my-2 text-sm font-normal 2xl:text-base">
             {Math.max(...Intentos) >= 10
               ? "Felicidades, la tarea resultó ser desafiante, pero conseguiste terminarla y ganar los puntos extra"
               : "La tarea resulto mas dificil de lo que pensabas y no pudiste terminarla a tiempo, no recibes bonificaciones"}

@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { TodasCartas } from "@/TodasCartas"
 import { FaQuestion } from "react-icons/fa"
-import Deck from "@/assets/deck.png"
+import Deck from "/EspolLifeGameChoices/assets/Cartas/Deck.png"
+import deckIcon from "@/assets/deck.png"
 import { useCardStore, useStatStore } from "@/AStore/AStore"
+import { PiCardsFill } from "react-icons/pi"
+import Card from "./Card"
 
 type Props = {}
 
@@ -11,9 +14,9 @@ function DeckButton({}: Props) {
   const handleMaze = useCardStore((state) => state.handleMaze)
   const playCards = useCardStore((state) => state.playCards)
   return (
-    <div className="relative z-20 w-min">
+    <div className="justify-left relative flex w-full items-end">
       <Button
-        className="flex size-24 flex-col rounded-sm bg-blue-600 hover:bg-blue-700/95 2xl:size-32"
+        className="relative flex h-min w-[53%] flex-col rounded-sm bg-transparent hover:bg-slate-900/20"
         onClick={() => handleMaze()}
         disabled={
           actionPoints <= 0 || Object.values(playCards).length >= 7
@@ -21,22 +24,20 @@ function DeckButton({}: Props) {
             : false
         }
       >
-        <img src={Deck} alt="Mazo" />
-        <span className="-mt-4 text-xs font-semibold 2xl:-mt-6 2xl:text-base">
+        <img className="rounded-lg" src={Deck} alt="Mazo" />
+        <span className="absolute rounded-sm bg-[#ff3b83] px-2 py-1 text-xs font-semibold 2xl:text-base">
           Coger Carta
         </span>
       </Button>
       {Object.keys(playCards).length >= 7 && (
-        <span className="absolute -left-[10%] top-[25%] w-[120%] rounded-md bg-slate-950/50 px-4 text-center text-xs font-semibold text-slate-200 2xl:text-base">
-          Número max de cartas alcanzado
+        <span className="absolute left-[6%] top-[40%] rounded-md bg-slate-950/90 px-4 text-center text-xs font-semibold text-slate-200 2xl:text-base">
+          Número max de <br />
+          cartas alcanzado
         </span>
       )}
       <TodasCartas>
-        <Button
-          size={"bigIcon"}
-          className="absolute -right-4 -top-4 rounded-sm bg-blue-950 hover:bg-blue-950/60 2xl:-right-6 2xl:-top-6"
-        >
-          <FaQuestion />
+        <Button className="absolute -top-[5%] left-[43%] aspect-square h-auto rounded-sm border-none bg-slate-950/80 p-2 outline-none hover:bg-blue-800/90">
+          <PiCardsFill className="size-8 rotate-90" />
         </Button>
       </TodasCartas>
     </div>

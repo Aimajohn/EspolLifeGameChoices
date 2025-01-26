@@ -17,7 +17,7 @@
     "energia": -1,
     "money": 0,
     "conocimiento": 2,
-    "social": 0
+    "social": 5
   },
   "007": {
     "id": "007",
@@ -37,7 +37,7 @@
     "energia": -1,
     "money": 0,
     "conocimiento": 0,
-    "social": 2
+    "social": 4
   },
   "009": {
     "id": "009",

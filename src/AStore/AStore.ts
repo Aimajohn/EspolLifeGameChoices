@@ -52,6 +52,7 @@ const StatStoreInitiall = {
   actionPoints: 3,
   currentTurn: 5,
   isGameOver: false,
+  Intentos: [],
 }
 
 const CardStoreInitial = {
@@ -104,6 +105,39 @@ export const useCardStore = create<CardStore>((set, get) => ({
   },
 }))
 
+type StatAnimation = {
+  turnos: boolean
+  acciones: boolean
+  descartes: boolean
+  setTurnos: () => void
+  setAcciones: () => void
+  setDescartes: () => void
+}
+
+export const useStatAnimation = create<StatAnimation>((set) => ({
+  turnos: false,
+  acciones: false,
+  descartes: false,
+  setTurnos: () => {
+    set(() => ({ turnos: true }))
+    setTimeout(() => {
+      set(() => ({ turnos: false }))
+    }, 1000)
+  },
+  setAcciones: () => {
+    set(() => ({ acciones: true }))
+    setTimeout(() => {
+      set(() => ({ acciones: false }))
+    }, 1000)
+  },
+  setDescartes: () => {
+    set(() => ({ descartes: true }))
+    setTimeout(() => {
+      set(() => ({ descartes: false }))
+    }, 1000)
+  },
+}))
+
 export const useStatStore = create<StatStore>((set, get) => ({
   rotation: { x: 720, y: 810, w: 720, z: 810 },
   actionPoints: 3,
@@ -115,7 +149,6 @@ export const useStatStore = create<StatStore>((set, get) => ({
   rollDice: () => {
     const rnd = Math.floor(Math.random() * 6) + 1
     const rnd2 = Math.floor(Math.random() * 6) + 1
-    console.log(rnd, rnd2)
     let x1, y2, w2, z2
     switch (rnd) {
       case 1:
@@ -156,8 +189,11 @@ export const useStatStore = create<StatStore>((set, get) => ({
     const initialRotation1 = { x: 720, y: 810, w: 720, z: 810 }
     set(() => ({ rotation: initialRotation1 }))
   },
-  setActionPoints: (numero: number) =>
-    set({ actionPoints: get().actionPoints + numero }),
+  setActionPoints: (numero: number) => {
+    const { setAcciones } = useStatAnimation.getState()
+    setAcciones()
+    set({ actionPoints: get().actionPoints + numero })
+  },
   setInitialStats: async () => {
     try {
       const initiStats = await deepCopy(infoInicial)
@@ -175,25 +211,25 @@ export const useStatStore = create<StatStore>((set, get) => ({
   },
   endTurn: () => {
     const { tableCards, cleanTable } = useCardStore.getState()
+    const { setTurnos } = useStatAnimation.getState()
     // const cleanTable = useCardStore((state) => state.cleanTable)
+    setTurnos()
     const { currentTurn } = get()
-    if (currentTurn > 0) {
-      set((state) => ({ currentTurn: state.currentTurn - 1 }))
-      set(() => ({ actionPoints: 3 }))
-      const tableScore = calcScore(tableCards)
-      if (Object.values(tableCards).length != 0) {
-        set((state) => ({
-          playerInfo: {
-            conocimiento:
-              state.playerInfo.conocimiento + tableScore.conocimiento,
-            energia: state.playerInfo.energia + tableScore.energia,
-            social: state.playerInfo.social + tableScore.social,
-            money: state.playerInfo.money + tableScore.money,
-          },
-        }))
-        cleanTable()
-      }
-    } else {
+    set((state) => ({ currentTurn: state.currentTurn - 1 }))
+    set(() => ({ actionPoints: 3 }))
+    const tableScore = calcScore(tableCards)
+    if (Object.values(tableCards).length != 0) {
+      set((state) => ({
+        playerInfo: {
+          conocimiento: state.playerInfo.conocimiento + tableScore.conocimiento,
+          energia: state.playerInfo.energia + tableScore.energia,
+          social: state.playerInfo.social + tableScore.social,
+          money: state.playerInfo.money + tableScore.money,
+        },
+      }))
+      cleanTable()
+    }
+    if (currentTurn <= 0) {
       const { setIsGameOver } = get()
       setIsGameOver()
     }

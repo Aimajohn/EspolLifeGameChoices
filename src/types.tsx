@@ -32,10 +32,10 @@ export interface CartaRetoT {
 }
 
 export const infoInicial = {
-  energia: 50,
-  money: 60,
-  conocimiento: 60,
-  social: 70,
+  energia: 59,
+  money: 30,
+  conocimiento: 45,
+  social: 50,
 }
 export type mazo = {
   [id: string]: CartaT

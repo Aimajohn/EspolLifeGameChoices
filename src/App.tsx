@@ -45,7 +45,7 @@ function App() {
 
   const renderJsonData = (cardData: mazo) => {
     return Object.entries(cardData).map(([key, value]) => (
-      <div className="-mx-1 w-[11%]" key={key}>
+      <div className="-mx-1 w-[14%]" key={key}>
         <div className="object-cover">
           <ModalCard
             info={value}
@@ -75,9 +75,9 @@ function App() {
           <HelpButton />
           <Alert variant={"game"} className="mt-4 rounded-sm">
             <Terminal className="h-5 w-5 !text-slate-200" />
-            <AlertTitle>Examen Final !</AlertTitle>
+            <AlertTitle>Examen Final</AlertTitle>
             <AlertDescription>
-              Parasuperar el examen debes alcanzar: <br />
+              Para superar el examen debes alcanzar: <br />
               <p className="font-medium opacity-90">
                 <span className="my-1 flex items-center">
                   <MdFiberSmartRecord size={15} className="mr-2" />
@@ -92,7 +92,7 @@ function App() {
             </AlertDescription>
           </Alert>
         </div>
-        <div className="col-start-3">
+        <div className="col-start-1 col-end-2 row-span-2 row-end-6 mt-auto flex h-min w-4/5 items-end rounded-sm bg-gray-900/80 2xl:w-80">
           <TimeChart />
         </div>
 
@@ -111,7 +111,7 @@ function App() {
 
         <article
           id="TableSection"
-          className="col-span-3 col-start-2 row-start-2 row-end-4 mx-auto mt-6 flex max-h-[300px] w-2/3 min-w-[30rem] flex-col items-center gap-4 bg-slate-700/80"
+          className="col-span-3 col-start-2 row-start-2 row-end-4 mx-auto -mt-10 flex max-h-[300px] w-2/3 min-w-[30rem] flex-col items-center gap-4 bg-slate-700/80"
         >
           <div className="-mb-2 min-h-10 w-full px-6 py-1">
             <Score />
@@ -121,16 +121,16 @@ function App() {
           </div>
         </article>
 
-        <div className="col-span-1 col-start-5 row-start-4 -mt-12 mr-12 flex justify-end">
+        <div className="col-span-1 col-start-5 row-start-4 row-end-6 ml-[10%] mr-12 flex w-full items-end justify-start">
           <DeckButton />
         </div>
 
         <section
           id="Cards&Deck"
-          className="relative col-span-5 col-start-1 row-start-4 row-end-6 -mb-4 mt-4 flex w-full flex-col items-center justify-end gap-2"
+          className="relative col-start-2 col-end-5 row-start-4 row-end-6 -mb-4 mt-4 flex w-full flex-col items-center justify-end gap-2"
         >
           <Button
-            className={`rounded-sm bg-blue-700 hover:bg-blue-800/90 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
+            className={`absolute top-0 rounded-sm bg-blue-700 hover:bg-blue-800/90 ${actionPoints <= 0 ? "animate-bounce" : ""}`}
             size={`lg`}
             onClick={() => endTurn()}
             type="button"
@@ -138,7 +138,7 @@ function App() {
             Terminar Turno
           </Button>
 
-          <div className="flex w-full flex-wrap justify-center gap-2">
+          <div className="mb-4 flex w-[110%] flex-wrap justify-center gap-2">
             {miMazo}
           </div>
         </section>
