@@ -12,7 +12,7 @@ El proyecto "ESPOL Life Choices" representa una experiencia creativa y colaborat
 
 🎮 Resultados: Experiencia práctica en el ciclo de vida de un videojuego web, desde la conceptualización hasta la implementación.
 
-<a href="https://github.com/Aimajohn/EspolLifeGameChoices">JUEGA AHORA</a>
+<a href="https://aimajohn.github.io/EspolLifeGameChoices/">JUEGA AHORA</a>
 
 
 ### Para instalacion
